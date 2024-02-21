@@ -21,10 +21,11 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 
 # Set up
 
-`Node >=v18.0`
+📦`Node >=v18.0`
 
 - install packages `npm install`
 - run dev server `npm run dev`
+- prod preview `npm run preview`
 
 # Commits
 
@@ -32,16 +33,20 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
   https://www.conventionalcommits.org/en/v1.0.0/
 
 - Commits through
-
   - commitizen
   - cz-git - https://cz-git.qbb.sh/cli/install
   - cz-conventional-changelog
+  - linter & formatter
+    - .lintstagedrc.json
+    - .prettierrc.json
+  - hooks
+    - pre-commit
+    - pre-commit-msg
 
-- Pre-release scripts by husky
+Command:  `npm run commit`
 
-  - eslint - lint-staged
-  - prettier
+# Release
 
-- To commit `npm run commit`
-
-# Releases
+- https://github.com/googleapis/release-please
+- https://github.com/googleapis/release-please/blob/main/docs/cli.md
+- https://semver.org

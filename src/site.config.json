@@ -1,0 +1,11 @@
+{
+  "storageOpts": {
+    "domain": "localhost",
+    "type": "local"
+  },
+  "tracking": {
+    "enabled": true,
+    "piwikSiteId": 123,
+    "schema": { "video": { "action": "presentation/video" } }
+  }
+}

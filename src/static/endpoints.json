@@ -1,0 +1,9 @@
+{
+  "endpoints": {
+    "TOKEN_VERIFY": "/token_verify_auth",
+    "TOKEN_REFRESH": "/token_refresh",
+    "FEEDBACK_URL": "/user_feedback",
+    "GET_ANON_TOKEN": "/token_get_anon",
+    "LOGIN": "/login"
+  }
+}
