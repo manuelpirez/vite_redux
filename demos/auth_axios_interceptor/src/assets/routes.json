@@ -7,7 +7,6 @@
     "feed": "feed",
     "misc": "misc",
     "article": "article",
-    "linkpage": "linkpage",
-    "unauthorized": "unauthorized"
+    "linkpage": "linkpage"
   }
 }
