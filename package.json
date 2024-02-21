@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "commit": "czg",
+    "commit:ai": "czg ai",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "prettier:check": "prettier --check ./src",
     "prettier:fix": "prettier --write ./src",

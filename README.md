@@ -28,6 +28,7 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 - Prod preview `npm run preview`
 
 # Commits
+
 `npm run commit`
 
 - We'll follow conventional commits convention
@@ -36,6 +37,7 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 - Commits through
   - commitizen
   - cz-git - https://cz-git.qbb.sh/cli/install
+    - Open ai setup https://cz-git.qbb.sh/recipes/openai
   - cz-conventional-changelog
   - linter & formatter
     - .lintstagedrc.json
@@ -51,12 +53,12 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 - https://semver.org
 
 # Testing
+
 `npm run test`
 
 `npm run test:ui`
 
 - react-testing-library + vitest
-
 
 # Config file
 
