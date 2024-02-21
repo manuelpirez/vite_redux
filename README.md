@@ -23,11 +23,12 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 
 📦`Node >=v18.0`
 
-- install packages `npm install`
-- run dev server `npm run dev`
-- prod preview `npm run preview`
+- `npm install`
+- Start dev server `npm run dev`
+- Prod preview `npm run preview`
 
 # Commits
+`npm run commit`
 
 - We'll follow conventional commits convention
   https://www.conventionalcommits.org/en/v1.0.0/
@@ -43,10 +44,24 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
     - pre-commit
     - pre-commit-msg
 
-Command:  `npm run commit`
-
 # Release
 
 - https://github.com/googleapis/release-please
 - https://github.com/googleapis/release-please/blob/main/docs/cli.md
 - https://semver.org
+
+# Testing
+`npm run test`
+
+`npm run test:ui`
+
+- react-testing-library + vitest
+
+
+# Config file
+
+- storageOptions
+  - type: "local" | "cookies"
+  - domain: domain to save when using cookies
+- tracking
+  - enabled: turn on/off piwik tracking
