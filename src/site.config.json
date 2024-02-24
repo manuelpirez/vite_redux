@@ -7,5 +7,26 @@
     "enabled": true,
     "piwikSiteId": 123,
     "schema": { "video": { "action": "presentation/video" } }
+  },
+  "environment": {
+    "phnxApi": "http://localhost:3000",
+    "phnxSiteId": 123,
+    "recaptchaKey": "6Lfy8gsjAAAAAAeEcM-rOq7tdMf27G7N_u5lk_cw"
+  },
+  "sections": {
+    "login": {
+      "forms": ["registration", "LoginWithEmailAndPass", "otp"],
+      "submitLink": "/user/login",
+      "LoginWithEmailTitle": "signInPageLoginWithEmailFieldLabel",
+      "LoginWithEmailText": "signInPageLoginWithEmailText",
+      "LoginWithEmailContactUs": {
+        "email": "ntkinstitute@ntk-institute.org",
+        "contactUslink": "/feedback",
+        "text": "signInPageLoginWithEmailSupp"
+      }
+    }
+  },
+  "localization": {
+    "brand": "NTK Institute"
   }
 }

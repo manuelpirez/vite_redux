@@ -1,19 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { logOut, setCredentials } from '@features/auth/authSlice'
+import { tokenGetAnon } from '@static/endpoints'
+import { environment } from '@config'
 
-const BASE_URL = 'http://localhost:3000'
-const ANON_ENDPOINT = '/token_get_anon'
 const REDUCER = 'publicApi'
-
 // override fetchBaseQuery to always send token when available
 const baseQuery = fetchBaseQuery({
-  baseUrl: BASE_URL,
+  baseUrl: environment.phnxApi,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.access
-    if (token) {
-      headers.set('authorization', `Bearer ${token}`)
-    }
+    if (token) headers.set('authorization', `Bearer ${token}`)
     return headers
   }
 })
@@ -25,7 +22,7 @@ const baseQueryWithAnon = async (args, api, extraOptions) => {
   if (token) {
     return await baseQuery(args, api, extraOptions)
   } else {
-    const anonResult = await baseQuery(ANON_ENDPOINT, api, extraOptions)
+    const anonResult = await baseQuery(tokenGetAnon, api, extraOptions)
 
     if (anonResult?.data) {
       const user = api.getState().auth?.user
@@ -42,10 +39,7 @@ const baseQueryWithAnon = async (args, api, extraOptions) => {
   }
 }
 
-/**
- * check if there's anon token
- * request one if necessary
- */
+// check if there's anon token request one if necessary
 const publicApiSlice = createApi({
   reducerPath: REDUCER,
   baseQuery: baseQueryWithAnon,

@@ -1,9 +1,0 @@
-{
-  "ROLES": {
-    "default": "default",
-    "auth": "auth",
-    "soft": "soft",
-    "limited": "limited",
-    "limited_reg": "limited_reg"
-  }
-}

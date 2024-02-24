@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { environment } from '@config'
 
-const BASE_URL = 'http://localhost:3000'
-
+// generic http request
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL
+    baseUrl: environment.phnxApi
   }),
   // eslint-disable-next-line no-unused-vars
   endpoints: builder => ({})

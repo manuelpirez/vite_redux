@@ -14,13 +14,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src/'),
-      '@components': path.resolve(__dirname, './src/components/'),
-      '@hooks': path.resolve(__dirname, './src/hooks/'),
-      '@static': path.resolve(__dirname, './src/static/'),
-      '@features': path.resolve(__dirname, './src/features/'),
       '@api': path.resolve(__dirname, './src/features/api'),
       '@public': path.resolve(__dirname, './public/'),
-      '@config': path.resolve(__dirname, './src/site.config.json')
+      '@static': path.resolve(__dirname, './src/static/'),
+      '@hooks': path.resolve(__dirname, './src/hooks/'),
+      '@config': path.resolve(__dirname, './src/site.config.json'),
+      '@features': path.resolve(__dirname, './src/features/'),
+      '@components': path.resolve(__dirname, './src/components/')
     }
   }
 })

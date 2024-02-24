@@ -8,6 +8,7 @@
     "misc": "misc",
     "article": "article",
     "linkpage": "linkpage",
-    "unauthorized": "unauthorized"
+    "unauthorized": "unauthorized",
+    "loginSuccess": "email-login"
   }
 }

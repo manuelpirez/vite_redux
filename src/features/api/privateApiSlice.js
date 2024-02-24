@@ -1,11 +1,20 @@
-// RTK is specifically for React
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { logOut, setCredentials } from '../auth/authSlice'
+import { logOut, setCredentials } from '@features/auth/authSlice'
+import { tokenRefresh } from '@static/endpoints'
+import { environment } from '@config'
 
-const BASE_URL = 'http://localhost:3000'
-const REFRESH_ENDPOINT = '/token_refresh'
 const REDUCER = 'privateApi'
-const SITE_ID = 1234
+
+// generic query with barer token
+const baseQuery = fetchBaseQuery({
+  baseUrl: environment.phnxApi,
+  credentials: 'include',
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.access
+    if (token) headers.set('authorization', `Bearer ${token}`)
+    return headers
+  }
+})
 
 // wrapper
 const baseQueryWithReauth = async (args, api, extraOptions) => {
@@ -19,11 +28,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     const refreshResult = await baseQuery(
       {
         body: {
-          siteId: SITE_ID,
+          siteId: environment.phnxSiteId,
           token
         },
         method: 'POST',
-        url: REFRESH_ENDPOINT
+        url: tokenRefresh
       },
       api,
       extraOptions
@@ -44,20 +53,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   }
   return result
 }
-const baseQuery = fetchBaseQuery({
-  baseUrl: BASE_URL,
-  credentials: 'include',
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.access
-    if (token) headers.set('authorization', `Bearer ${token}`)
-    return headers
-  }
-})
 
-/**
- * perform requests with auth token
- * tries to refresh if failed
- */
+// perform requests with auth token, tries to refresh if failed
 const privateApiSlice = createApi({
   reducerPath: REDUCER,
   baseQuery: baseQueryWithReauth,

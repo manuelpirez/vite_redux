@@ -1,27 +1,25 @@
 import privateApiSlice from '@api/privateApiSlice.js'
-
-const VERIFY_ENDPOINT = '/token_verify_auth'
-const REFRESH_ENDPOINT = '/refresh'
-const SITE_ID = 1234
+import { environment } from '@config'
+import { tokenVerify, tokenRefresh } from '@static/endpoints'
 
 export const privateRequestsSlice = privateApiSlice.injectEndpoints({
   endpoints: builder => ({
     tokenVerify: builder.mutation({
       query: token => ({
-        url: VERIFY_ENDPOINT,
+        url: tokenVerify,
         method: 'POST',
         body: {
-          siteId: SITE_ID,
+          siteId: environment.phnxSiteId,
           token
         }
       })
     }),
     tokenRefresh: builder.mutation({
       query: token => ({
-        url: REFRESH_ENDPOINT,
+        url: tokenRefresh,
         method: 'POST',
         body: {
-          siteId: SITE_ID,
+          siteId: environment.phnxSiteId,
           token
         }
       })

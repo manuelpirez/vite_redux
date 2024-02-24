@@ -10,11 +10,14 @@ import Article from '@components/Article.jsx'
 import LinkPage from '@components/LinkPage'
 import PersistLogin from '@components/PersistLogin.jsx'
 import Home from '@components/Home'
-import Login from '@components/Login'
+//import Login from '@components/Login'
 import RequireAuth from '@components/RequireAuth'
 import Layout from '@components/Layout'
 import NotFound from '@components/NotFound'
 import Unauthorized from '@components/Unauthorized'
+
+import Login from '@components/login/Login'
+import LoginSuccess from '@components/login/loginSuccess/LoginSuccess'
 
 import useTracking from '@hooks/tracking/useTracking.js'
 
@@ -27,6 +30,8 @@ function App() {
         {/* public */}
         <Route element={<PersistLogin />}>
           <Route path={ROUTES.login} element={<Login />} />
+          <Route path={ROUTES.loginSuccess} element={<LoginSuccess />} />
+
           <Route path={ROUTES.feedback} element={<Feedback />} />
           <Route path={ROUTES.misc} element={<Misc />} />
           <Route path={ROUTES.unauthorized} element={<Unauthorized />} />

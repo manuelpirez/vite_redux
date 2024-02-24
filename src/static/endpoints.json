@@ -1,9 +1,10 @@
 {
-  "endpoints": {
-    "TOKEN_VERIFY": "/token_verify_auth",
-    "TOKEN_REFRESH": "/token_refresh",
-    "FEEDBACK_URL": "/user_feedback",
-    "GET_ANON_TOKEN": "/token_get_anon",
-    "LOGIN": "/login"
-  }
+  "tokenVerify": "/token_verify_auth",
+  "tokenRefresh": "/token_refresh",
+  "tokenGetAnon": "/token_get_anon",
+  "tokenLogin": "/token_login",
+  "feedback": "/user_feedback",
+  "login": "/v2/user/login",
+  "loginWithEmail": "/v2/user/otp",
+  "registration": "/v2/user/registration"
 }
