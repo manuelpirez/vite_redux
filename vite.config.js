@@ -20,7 +20,8 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/hooks/'),
       '@config': path.resolve(__dirname, './src/site.config.json'),
       '@features': path.resolve(__dirname, './src/features/'),
-      '@components': path.resolve(__dirname, './src/components/')
+      '@components': path.resolve(__dirname, './src/components/'),
+      '@ui': path.resolve(__dirname, './src/components/ui')
     }
   }
 })

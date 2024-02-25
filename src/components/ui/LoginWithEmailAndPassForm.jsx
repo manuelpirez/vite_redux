@@ -4,9 +4,9 @@ import { useTheme } from '@mui/material'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
-import FormDivider from '@components/formDivider/FormDivider'
-import FormButton from '@components/formButton/FormButton'
-import FormInput from '@components/formInput/FormInput'
+import FormDivider from '@ui/FormDivider'
+import FormButton from '@ui/FormButton'
+import FormInput from '@ui/FormInput'
 
 const container = {
   marginTop: '24px'

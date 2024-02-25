@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import useTracking from '@hooks/tracking/useTracking'
-
 import useLogin from '@hooks/auth/useLogin.js'
-import LoginWithEmailForm from '@components/ui/LoginWithEmailForm'
+
+import LoginWithEmailForm from '@ui/LoginWithEmailForm'
 
 const LoginWithEmail = () => {
   const { t } = useTranslation()

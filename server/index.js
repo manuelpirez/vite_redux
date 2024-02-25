@@ -26,16 +26,16 @@ app.all('/*', function (req, res, next) {
 })
 
 // AUTH
-let count = 0
+// let count = 0
 app.post('/token_verify_auth', (req, res) => {
   console.log('/token_verify_auth')
-  count++
+  // count++
   const payload = mockdb.token_verify_auth
-  if (count % 2) {
-    res.status(403).send('You do not have rights to visit this page')
-  } else {
-    res.json({ ...payload })
-  }
+  // if (count % 2) {
+  // res.status(403).send('You do not have rights to visit this page')
+  // } else {
+  res.json({ ...payload })
+  // }
 })
 app.get('/token_get_anon', (req, res) => {
   console.log('/token_get_anon')
@@ -67,8 +67,14 @@ app.post('/v2/user/otp', (req, res) => {
 })
 app.post('/token_login', (req, res) => {
   console.log('/token_login')
-  const payload = mockdb.token_verify_auth
-  res.json({ ...payload })
+  // const payload = mockdb.token_verify_auth
+  // res.json({ ...payload })
+
+  setTimeout(() => {
+    console.log('Delayed for 5 second.')
+    const payload = mockdb.token_verify_auth
+    res.json({ ...payload })
+  }, '2000')
 })
 app.post('/v2/user/registration', (req, res) => {
   console.log('/v2/user/registration')
@@ -111,7 +117,7 @@ app.post('/list', (req, res) => {
 
   const id = req.body.id
   const title = req.body.title
-  count++
+  // count++
   newMock.results = [...newMock.results, { id, title }]
   //if (count % 2) {
   //  res.status(403).send('You do not have rights to visit this page')

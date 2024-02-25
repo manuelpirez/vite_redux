@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-import FormInputHelper from '@components/formInputHelper/FormInputHelper'
+import FormInputHelper from '@ui/FormInputHelper'
 
 /**
  * react-hook-form MUI integration

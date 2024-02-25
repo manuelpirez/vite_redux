@@ -6,9 +6,9 @@ import { FormControl, MenuItem, Select as SelectMui } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { styled } from '@mui/material/styles'
 
-import FormInputHelper from '@components/formInputHelper/FormInputHelper'
-import Input from '@components/input/Input'
-import Label from '@components/label/Label'
+import FormInputHelper from '@ui/FormInputHelper'
+import Input from '@ui/Input'
+import Label from '@ui/Label'
 
 const Select = styled(SelectMui, {
   name: 'FormDropDown',

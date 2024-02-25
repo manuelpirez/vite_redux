@@ -4,10 +4,10 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 
-import FormButton from '@components/formButton/FormButton'
-import FormInput from '@components/formInput/FormInput'
-import FormCheckBox from '@components/formCheckBox/FormCheckBox'
-import FormDropDown from '@components/formDropDown/FormDropDown'
+import FormButton from '@ui/FormButton'
+import FormInput from '@ui/FormInput'
+import FormCheckBox from '@ui/FormCheckBox'
+import FormDropDown from '@ui/FormDropDown'
 
 const titleContainer = {
   display: 'flex',

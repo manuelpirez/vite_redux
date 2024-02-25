@@ -1,29 +1,26 @@
 import { Routes, Route } from 'react-router-dom'
+
 import { ROLES } from '@static/roles.json'
 import { ROUTES } from '@static/routes.json'
 
-import Feedback from '@components/Feedback.jsx'
-import Feed from '@components/feed/Feed.jsx'
-import Misc from '@components/Misc.jsx'
-import Profile from '@components/Profile.jsx'
-import Article from '@components/Article.jsx'
+import Login from '@components/login/Login'
+import LoginSuccess from '@components/login/LoginSuccess'
+
+import PersistLogin from '@components/auth/PersistLogin'
+import RequireAuth from '@components/auth/RequireAuth'
+
+import Feedback from '@components/Feedback'
+import Feed from '@components/feed/Feed'
+import Misc from '@components/Misc'
+import Profile from '@components/Profile'
+import Article from '@components/Article'
 import LinkPage from '@components/LinkPage'
-import PersistLogin from '@components/PersistLogin.jsx'
 import Home from '@components/Home'
-//import Login from '@components/Login'
-import RequireAuth from '@components/RequireAuth'
 import Layout from '@components/Layout'
 import NotFound from '@components/NotFound'
 import Unauthorized from '@components/Unauthorized'
 
-import Login from '@components/login/Login'
-import LoginSuccess from '@components/login/loginSuccess/LoginSuccess'
-
-import useTracking from '@hooks/tracking/useTracking.js'
-
 function App() {
-  useTracking()
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

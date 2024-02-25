@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
-import FormInput from '@components/formInput/FormInput'
-import FormButton from '@components/formButton/FormButton'
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+
+import FormInput from '@ui/FormInput'
+import FormButton from '@ui/FormButton'
 
 const container = {
   marginTop: '58px'

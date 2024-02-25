@@ -1,10 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-import publicApiSlice from '@features/api/publicApiSlice.js'
-import privateApiSlice from '@features/api/privateApiSlice.js'
-import apiSlice from '@features/api/apiSlice.js'
-import authReducer from '@features/auth/authSlice.js'
-
 import {
   persistReducer,
   FLUSH,
@@ -20,6 +15,15 @@ import Cookies from 'cookies-js'
 import { storageOpts } from '@config'
 import storage from 'redux-persist/lib/storage'
 
+import publicApiSlice from '@features/api/publicApiSlice.js'
+import privateApiSlice from '@features/api/privateApiSlice.js'
+import apiSlice from '@features/api/apiSlice.js'
+
+import authReducer from '@features/auth/authSlice.js'
+
+import urlParamsReducer from '@features/params/urlParamsSlice.js'
+import urlPersistParamsReducer from '@features/params/urlPersistParamsSlice.js'
+
 const persistConfig = {
   key: 'root',
   storage:
@@ -30,11 +34,13 @@ const persistConfig = {
           }
         })
       : storage,
-  whitelist: ['auth']
+  whitelist: ['auth', 'urlPersistParams']
 }
 
 const reducers = combineReducers({
   auth: authReducer,
+  urlParams: urlParamsReducer,
+  urlPersistParams: urlPersistParamsReducer,
   [publicApiSlice.reducerPath]: publicApiSlice.reducer,
   [privateApiSlice.reducerPath]: privateApiSlice.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer

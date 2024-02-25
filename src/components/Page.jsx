@@ -9,6 +9,15 @@ const Page = ({
   withoutWrap = false,
   isFeed = false
 }) => {
+  console.log({
+    subHeader,
+    showHero,
+    specialContainer,
+    showHeader,
+    showFooter,
+    withoutWrap,
+    isFeed
+  })
   return <div>{children}</div>
 }
 export default Page

@@ -72,7 +72,7 @@ const Feed = () => {
   return (
     <div>
       <div className="flexGrow">
-        <Link to="/">Home</Link>
+        <Link to="/linkpage">linkpage</Link>
       </div>
       <h1>Article Feed</h1>
       <div>

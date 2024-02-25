@@ -1,25 +1,30 @@
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { actions } from '@static/tracking.json'
-//import useTrackingService from '@hooks/tracking/useTrackingService'
+import { useLocation } from 'react-router-dom'
 
 const useTracking = () => {
   const location = useLocation()
-  //const { initializeTrackingScript } = useTrackingService()
+  // const { mergedParams } = useGetParams([
+  //   'interactionid',
+  //   'testpersist',
+  //   'testnopersist',
+  //   'noexisto'
+  // ])
 
-  useEffect(() => {
-    // only init once init flag from state
-    /*initializeTrackingScript({
-      url: '//staging-piwik.docguide.com/',
-      piwikSiteId: 123,
-      scriptName: 'piwik.js',
-      scriptUrl: '//staging.piwik.pslgroup.com/',
-      secure: true
-    })*/
-    console.log(location)
-    console.log(location.state)
-    trackPageView(location)
-  }, [location])
+  // useEffect(() => {
+  //   // only init once init flag from state
+  //   /*initializeTrackingScript({
+  //     url: '//staging-piwik.docguide.com/',
+  //     piwikSiteId: 123,
+  //     scriptName: 'piwik.js',
+  //     scriptUrl: '//staging.piwik.pslgroup.com/',
+  //     secure: true
+  //   })*/
+  // }, [location])
+
+  //useEffect(() => {
+  // console.log({ mergedParams })
+  //return () => navigate({ search: '' })
+  //}, [])
 
   //const dispatch = useDispatch()
   const trackSubmitAction = ({ action }) => {
@@ -29,7 +34,7 @@ const useTracking = () => {
     //dispatch(trackActions.trackSubmitAction(obj))
   }
 
-  const trackPageView = location => {
+  const trackPageView = () => {
     console.log('trackPageView')
     const track = actions[location.pathname]?.name || location.pathname
     console.log({ track })

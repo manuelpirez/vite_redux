@@ -3,9 +3,9 @@ import { Controller } from 'react-hook-form'
 
 import FormControl from '@mui/material/FormControl'
 
-import FormInputHelper from '@components/formInputHelper/FormInputHelper'
-import Input from '@components/input/Input'
-import Label from '@components/label/Label'
+import FormInputHelper from '@ui/FormInputHelper'
+import Input from '@ui/Input'
+import Label from '@ui/Label'
 
 const formControlStyle = { width: '100%' }
 

@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next'
 
 import { useNavigate } from 'react-router-dom'
 
-import LoginWithEmailAndPassForm from '@components/ui/LoginWithEmailAndPassForm'
-
 import useTracking from '@hooks/tracking/useTracking'
 import useLogin from '@hooks/auth/useLogin.js'
+
+import LoginWithEmailAndPassForm from '@ui/LoginWithEmailAndPassForm'
 
 const LoginWithEmailAndPass = () => {
   const { t } = useTranslation()

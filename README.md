@@ -67,3 +67,29 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
   - domain: domain to save when using cookies
 - tracking
   - enabled: turn on/off piwik tracking
+
+# Static Files
+
+- urlParams.json
+  - persist
+    - variables that will be stored in cookies
+    - should be all lower caps
+  - noPersist
+    - volvatile variables that will be stored on redux state
+
+# Changes
+
+- React v18
+- react-router v6
+- cra -> Vite
+- Redux -> old v new v
+- awilix -> no more
+
+# todo
+
+- sign out to delete params
+- changing themes
+- translation update
+- params CRUD
+- fix tests
+- tracking

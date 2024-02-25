@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 import useTokenLogin from '@hooks/auth/useTokenLogin.js'
 import useTokenVerify from '@hooks/auth/useTokenVerify.js'
 
 import { selectAccessToken } from '@features/auth/authSlice.js'
+
+import useSaveUrlParams from '@hooks/params/useSaveUrlParams'
+import useTracking from '@hooks/tracking/useTracking.js'
 
 /**
  * The `PersistLogin` function handles the authentication and authorization logic in a React application.
@@ -15,11 +18,21 @@ import { selectAccessToken } from '@features/auth/authSlice.js'
  */
 const PersistLogin = () => {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { trackPageView } = useTracking()
+
   const tokenLogin = useTokenLogin()
   const tokenVerify = useTokenVerify()
   const token = useSelector(selectAccessToken)
+  useSaveUrlParams()
+  //const track = useTracking()
 
   const [isLoading, setIsLoading] = useState(true)
+
+  const clearQueryParams = () => {
+    // Check if there are search parameters before navigating
+    if (location.search) navigate({ search: '' })
+  }
 
   const _tokenVerify = async isMounted => {
     setIsLoading(true)
@@ -38,6 +51,8 @@ const PersistLogin = () => {
     try {
       console.log('_tokenLogin')
       await tokenLogin()
+      // clear
+      clearQueryParams()
     } catch (e) {
       console.error(e)
       _tokenLogOut()
@@ -51,11 +66,11 @@ const PersistLogin = () => {
   }
 
   useEffect(() => {
-    console.log('PERSIST')
-    //console.log({auth})
+    trackPageView()
     let isMounted = true
 
     if (location.search) {
+      //TODO token hierarchy
       console.log('urltoken available')
       _tokenLogin(isMounted)
     } else if (token) {
@@ -71,7 +86,7 @@ const PersistLogin = () => {
       isMounted = false
     }
     // eslint-disable-next-line
-  }, [location])
+  }, [location.pathname, location.search])
 
   if (isLoading) return <p> LOADING... </p>
 

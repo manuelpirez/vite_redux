@@ -1,0 +1,4 @@
+{
+  "persist": ["interactionid", "testpersist"],
+  "noPersist": ["ugcaction", "testnopersist"]
+}

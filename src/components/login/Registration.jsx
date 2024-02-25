@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import RegistrationForm from '@components/ui/RegistrationForm'
-
 import useRecaptcha from '@hooks/useRecaptcha.js'
 import useStdEmailRequest from '@hooks/useStdEmailRequest.js'
 import useParseStaticProfileData from '@hooks/useParseStaticProfileData.js'
+
+import RegistrationForm from '@ui/RegistrationForm'
 
 import { localization, environment } from '@config'
 
