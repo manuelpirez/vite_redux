@@ -59,6 +59,8 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 `npm run test:ui`
 
 - react-testing-library + vitest
+- https://mswjs.io/
+- jsdom
 
 # Config file
 
@@ -84,6 +86,7 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 - cra -> Vite
 - Redux -> old v new v
 - awilix -> no more
+- jest -> vitest https://vitest.dev/
 
 # todo
 

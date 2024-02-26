@@ -6,5 +6,6 @@
   "feedback": "/user_feedback",
   "login": "/v2/user/login",
   "loginWithEmail": "/v2/user/otp",
-  "registration": "/v2/user/registration"
+  "registration": "/v2/user/registration",
+  "misc": "/v2/content/miscs"
 }
