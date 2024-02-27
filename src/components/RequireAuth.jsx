@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { selectRole } from '@features/auth/authSlice.js'
+import { selectRole } from '@features/authSlice.js'
 
 /**
  * Check allowed role agains token and grants/deny access

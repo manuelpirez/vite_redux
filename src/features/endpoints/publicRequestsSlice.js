@@ -1,23 +1,20 @@
 import publicApiSlice from '@api/publicApiSlice'
-import {
-  login,
-  feedback,
-  registration,
-  loginWithEmail
-} from '@static/endpoints'
+import { userLogin, feedback, registration, otp } from '@static/endpoints'
 
+// Adds anon token
+// Does not do refresh
 export const publicRequestsSlice = publicApiSlice.injectEndpoints({
   endpoints: builder => ({
     emailPassLogin: builder.mutation({
       query: credentials => ({
-        url: login,
+        url: userLogin,
         method: 'POST',
         body: { ...credentials }
       })
     }),
     emailLogin: builder.mutation({
       query: credentials => ({
-        url: loginWithEmail,
+        url: otp,
         method: 'POST',
         body: { ...credentials }
       })

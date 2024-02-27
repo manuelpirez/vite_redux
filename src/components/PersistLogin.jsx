@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
-import useTokenLogin from '@hooks/auth/useTokenLogin.js'
-import useTokenVerify from '@hooks/auth/useTokenVerify.js'
+import useTokenLogin from '@hooks/useTokenLogin'
+import useTokenVerify from '@hooks/useTokenVerify'
 
-import { selectAccessToken } from '@features/auth/authSlice.js'
+import { selectAccessToken } from '@features/authSlice'
 
-import useSaveUrlParams from '@hooks/params/useSaveUrlParams'
-import useTracking from '@hooks/tracking/useTracking.js'
+import useSaveUrlParams from '@hooks/useSaveUrlParams'
+import useTracking from '@hooks/useTracking'
 
 /**
  * The `PersistLogin` function handles the authentication and authorization logic in a React application.

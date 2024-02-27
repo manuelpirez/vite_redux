@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next'
 
 import { useNavigate } from 'react-router-dom'
 
-import useTracking from '@hooks/tracking/useTracking'
-import useLogin from '@hooks/auth/useLogin.js'
+import useTracking from '@hooks/useTracking'
+import useLogin from '@hooks/useLogin.js'
 
 import LoginWithEmailAndPassForm from '@ui/LoginWithEmailAndPassForm'
 

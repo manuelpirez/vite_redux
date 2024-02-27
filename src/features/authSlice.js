@@ -30,10 +30,13 @@ const authSlice = createSlice({
         },
         info
       } = action.payload
+
       state.access = access
       state.refresh = refresh
       state.user = info
       state.role = name
+      // Encryption
+      //state.crypt = encrypted
     },
     logOut: state => {
       state.access = undefined

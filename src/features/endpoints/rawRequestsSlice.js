@@ -1,12 +1,12 @@
 import apiSlice from '@api/apiSlice.js'
 import { environment } from '@config'
-import { tokenLogin } from '@static/endpoints'
+import { tokenVerify } from '@static/endpoints'
 
 export const publicRequestsSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     tokenLogin: builder.mutation({
       query: token => ({
-        url: tokenLogin,
+        url: tokenVerify,
         method: 'POST',
         body: {
           siteId: environment.phnxSiteId,

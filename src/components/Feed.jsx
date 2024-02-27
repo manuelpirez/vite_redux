@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from 'react'
-
-import ArtCard from './ArtCard.jsx'
-import { useGetFeedMutation } from '@features/content/feedSlice.js'
 import { Link } from 'react-router-dom'
-import useTracking from '@hooks/tracking/useTracking.js'
+
+import ArtCard from '@components/ui/ArtCard'
+import useTracking from '@hooks/useTracking'
+import useFeedBuilder from '@hooks/useFeedBuilder'
 
 const FEED_TOTAL_PAGES = 5
 const FEED_AD_INDEX = 2
@@ -15,8 +15,7 @@ const AD = {
 
 const Feed = () => {
   const { trackAction } = useTracking()
-
-  const [getFeed] = useGetFeedMutation()
+  const { getFeedData } = useFeedBuilder()
 
   const [initial, setInitial] = useState(true)
   const [articles, setArticles] = useState([])
@@ -34,7 +33,7 @@ const Feed = () => {
   const callFeed = async () => {
     try {
       setLoading(true)
-      let response = await getFeed({ query: 123 })
+      let response = await getFeedData({ query: 123 })
 
       trackAction({ action: 'feed', extra: `${pageNum}` })
 

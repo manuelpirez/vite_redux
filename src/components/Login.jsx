@@ -1,6 +1,6 @@
-import LoginWithEmail from '@components/login/LoginWithEmail'
-import LoginWithEmailAndPass from '@components/login/LoginWithEmailAndPass'
-import Registration from '@components/login/Registration'
+import LoginWithEmail from '@components/LoginWithEmail'
+import LoginWithEmailAndPass from '@components/LoginWithEmailAndPass'
+import Registration from '@components/Registration'
 
 import { sections } from '@config'
 
@@ -8,7 +8,6 @@ const Login = () => {
   const {
     login: { forms }
   } = sections
-  console.log({ forms })
   return (
     <>
       {forms.includes('otp') && <LoginWithEmail />}
