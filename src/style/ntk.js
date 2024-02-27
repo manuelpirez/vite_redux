@@ -64,7 +64,7 @@ export const fontFamily = {
   fontQuaternary: 'Helvetica',
   fontSenary: 'AvenirNext-DemiBold'
 }
-const theme = createTheme({
+const ntk = createTheme({
   palette: {
     background: {
       main: palette.backGray
@@ -1244,4 +1244,4 @@ const theme = createTheme({
   },
   zIndex: { appBar: 2, drawer: 4 }
 })
-export default theme
+export default ntk

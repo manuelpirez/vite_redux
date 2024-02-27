@@ -1,4 +1,5 @@
 {
+  "brand": "ntk",
   "storageOpts": {
     "domain": "localhost",
     "type": "local"

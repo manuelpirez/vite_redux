@@ -21,6 +21,7 @@ export default defineConfig({
       '@config': path.resolve(__dirname, './src/site.config.json'),
       '@features': path.resolve(__dirname, './src/features/'),
       '@components': path.resolve(__dirname, './src/components/'),
+      '@theme': path.resolve(__dirname, './src/style/'),
       '@ui': path.resolve(__dirname, './src/components/ui')
     }
   }
