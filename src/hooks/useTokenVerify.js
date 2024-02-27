@@ -3,8 +3,8 @@ import {
   logOut,
   selectAccessToken,
   setDefCredentials
-} from '@features/auth/authSlice.js'
-import { useTokenVerifyMutation } from '@api/endpoints/privateRequestsSlice.js'
+} from '@features/authSlice.js'
+import { useTokenVerifyMutation } from '@features/endpoints/privateRequestsSlice.js'
 
 /**
  * Use URL token to log user in

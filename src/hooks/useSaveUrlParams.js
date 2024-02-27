@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-import { setPersistParams } from '@features/params/urlPersistParamsSlice.js'
-import { setParams } from '@features/params/urlParamsSlice.js'
+import { setPersistParams } from '@features/urlPersistParamsSlice'
+import { setParams } from '@features/urlParamsSlice'
 import { useCallback, useEffect } from 'react'
 
 const useSaveUrlParams = () => {

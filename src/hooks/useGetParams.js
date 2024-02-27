@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 
-import { selectPersistParamsByKey } from '@features/params/urlPersistParamsSlice.js'
-import { selectParamsByKey } from '@features/params/urlParamsSlice.js'
+import { selectPersistParamsByKey } from '@features/urlPersistParamsSlice'
+import { selectParamsByKey } from '@features/urlParamsSlice'
 
 const useGetParams = (keys = []) => {
   const persistParams =

@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux'
 
-import { logOut, setDefCredentials } from '@features/auth/authSlice.js'
+import { logOut, setDefCredentials } from '@features/authSlice'
 import {
   useEmailPassLoginMutation,
   useEmailLoginMutation
-} from '@api/endpoints/publicRequestsSlice.js'
+} from '@features/endpoints/publicRequestsSlice'
 
 /**
  * Use URL token to log user in

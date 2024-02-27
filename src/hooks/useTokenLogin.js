@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { useTokenLoginMutation } from '@api/endpoints/rawRequestsSlice.js'
-import { setDefCredentials } from '@features/auth/authSlice.js'
+import { useTokenLoginMutation } from '@features/endpoints/rawRequestsSlice.js'
+import { setDefCredentials } from '@features/authSlice.js'
 
 /**
  * Use URL token to log user in

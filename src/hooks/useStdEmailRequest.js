@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { selectCurrentUser } from '@features/auth/authSlice'
-import { useRegistrationMutation } from '@api/endpoints/publicRequestsSlice.js'
+import { selectCurrentUser } from '@features/authSlice'
+import { useRegistrationMutation } from '@features/endpoints/publicRequestsSlice'
 
 const useStdEmailRequest = () => {
   const user = useSelector(selectCurrentUser)
