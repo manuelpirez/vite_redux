@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Feed from '@components/feed/Feed.jsx'
+import Feed from '@components/Feed.jsx'
 
 const Article = () => {
   return (

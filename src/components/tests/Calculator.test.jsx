@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { suma } from '../Calculator'
+import { suma } from '@components/ui/Calculator'
 
 describe('Suma', () => {
   it('Suma should be function', () => {

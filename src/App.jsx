@@ -3,22 +3,20 @@ import { Routes, Route } from 'react-router-dom'
 import { ROLES } from '@static/roles.json'
 import { ROUTES } from '@static/routes.json'
 
-import Login from '@components/login/Login'
-import LoginSuccess from '@components/login/LoginSuccess'
-
-import PersistLogin from '@components/auth/PersistLogin'
-import RequireAuth from '@components/auth/RequireAuth'
-
+import PersistLogin from '@components/PersistLogin'
+import RequireAuth from '@components/RequireAuth'
 import Feedback from '@components/Feedback'
-import Feed from '@components/feed/Feed'
+import Feed from '@components/Feed'
 import Misc from '@components/Misc'
 import Profile from '@components/Profile'
 import Article from '@components/Article'
 import LinkPage from '@components/LinkPage'
 import Home from '@components/Home'
 import Layout from '@components/Layout'
+import Login from '@components/Login'
 import NotFound from '@components/NotFound'
 import Unauthorized from '@components/Unauthorized'
+import LoginSuccess from '@components/LoginSuccess'
 
 function App() {
   return (

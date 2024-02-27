@@ -15,14 +15,15 @@ import Cookies from 'cookies-js'
 import { storageOpts } from '@config'
 import storage from 'redux-persist/lib/storage'
 
-import publicApiSlice from '@features/api/publicApiSlice.js'
-import privateApiSlice from '@features/api/privateApiSlice.js'
-import apiSlice from '@features/api/apiSlice.js'
+import publicApiSlice from '@features/api/publicApiSlice'
+import privateApiSlice from '@features/api/privateApiSlice'
+import apiSlice from '@features/api/apiSlice'
 
-import authReducer from '@features/auth/authSlice.js'
+import authReducer from '@features/authSlice'
 
-import urlParamsReducer from '@features/params/urlParamsSlice.js'
-import urlPersistParamsReducer from '@features/params/urlPersistParamsSlice.js'
+import urlParamsReducer from '@features/urlParamsSlice'
+import urlPersistParamsReducer from '@features/urlPersistParamsSlice'
+import dataReducer from '@features/dataSlice'
 
 const persistConfig = {
   key: 'root',
@@ -41,6 +42,7 @@ const reducers = combineReducers({
   auth: authReducer,
   urlParams: urlParamsReducer,
   urlPersistParams: urlPersistParamsReducer,
+  data: dataReducer,
   [publicApiSlice.reducerPath]: publicApiSlice.reducer,
   [privateApiSlice.reducerPath]: privateApiSlice.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer
@@ -50,6 +52,7 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 
 export const store = configureStore({
   reducer: persistedReducer,
+  // MW for caching and magic
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

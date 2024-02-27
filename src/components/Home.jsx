@@ -1,6 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentUser, logOut } from '@features/auth/authSlice.js'
+import { selectCurrentUser, logOut } from '@features/authSlice'
 const Home = () => {
   const navigate = useNavigate()
   const userData = useSelector(selectCurrentUser)

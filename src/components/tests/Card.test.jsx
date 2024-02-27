@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, it, expect } from 'vitest'
-import Card from '../Card'
+import Card from '@components/ui/Card'
 
 describe('Card test:', () => {
   afterEach(cleanup)

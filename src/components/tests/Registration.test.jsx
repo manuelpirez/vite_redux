@@ -2,7 +2,7 @@ import { cleanup, render } from '@testing-library/react'
 import { afterEach, describe, it, vi, expect } from 'vitest'
 // import { cleanup, render, fireEvent, screen } from '@testing-library/react'
 // import { afterEach, describe, it, vi, expect, waitFor } from 'vitest'
-import Registration from '../login/Registration'
+import Registration from '@components/Registration'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 

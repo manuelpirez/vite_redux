@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useSendFeedbackMutation } from '@features/api/endpoints/publicRequestsSlice.js'
-import useTracking from '@hooks/tracking/useTracking.js'
+import { useSendFeedbackMutation } from '@features/endpoints/publicRequestsSlice'
+import useTracking from '@hooks/useTracking'
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/
 const Feedback = () => {

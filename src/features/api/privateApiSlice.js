@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { logOut, setCredentials } from '@features/auth/authSlice'
+import { logOut, setCredentials } from '@features/authSlice'
 import { tokenRefresh } from '@static/endpoints'
 import { environment } from '@config'
 
 const REDUCER = 'privateApi'
 
-// generic query with barer token
+// perform requests with auth token, tries to refresh if failed
 const baseQuery = fetchBaseQuery({
   baseUrl: environment.phnxApi,
   credentials: 'include',
@@ -16,23 +16,23 @@ const baseQuery = fetchBaseQuery({
   }
 })
 
-// wrapper
+// refresh query if API responds with 403
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
-  // if verify request is rejected, try refresh
+  // try refresh
   if (result?.error?.originalStatus === 403) {
     const token = api.getState().auth?.access
 
     // override args for refresh
     const refreshResult = await baseQuery(
       {
+        method: 'POST',
+        url: tokenRefresh,
         body: {
           siteId: environment.phnxSiteId,
           token
-        },
-        method: 'POST',
-        url: tokenRefresh
+        }
       },
       api,
       extraOptions
@@ -54,7 +54,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   return result
 }
 
-// perform requests with auth token, tries to refresh if failed
 const privateApiSlice = createApi({
   reducerPath: REDUCER,
   baseQuery: baseQueryWithReauth,
