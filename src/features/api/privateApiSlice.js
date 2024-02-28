@@ -18,38 +18,47 @@ const baseQuery = fetchBaseQuery({
 
 // refresh query if API responds with 403
 const baseQueryWithReauth = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions)
+  let result
+  try {
+    result = await baseQuery(args, api, extraOptions)
 
-  // try refresh
-  if (result?.error?.originalStatus === 403) {
-    const token = api.getState().auth?.access
+    // try refresh
+    if (
+      result?.error?.originalStatus === 403 ||
+      result?.error?.status === 403
+    ) {
+      const token = api.getState().auth?.access
 
-    // override args for refresh
-    const refreshResult = await baseQuery(
-      {
-        method: 'POST',
-        url: tokenRefresh,
-        body: {
-          siteId: environment.phnxSiteId,
-          token
-        }
-      },
-      api,
-      extraOptions
-    )
+      // override args for refresh
+      try {
+        const refreshResult = await baseQuery(
+          {
+            method: 'POST',
+            url: tokenRefresh,
+            body: {
+              siteId: environment.phnxSiteId,
+              token
+            }
+          },
+          api,
+          extraOptions
+        )
 
-    if (refreshResult?.data) {
-      // we're supposed to have a user already
-      const user = api.getState().auth?.user
-      const role = api.getState().auth?.role
-      const access = refreshResult.data.access
-      const refresh = refreshResult.data.refresh
-      api.dispatch(setCredentials({ access, refresh, user, role }))
-      // retry original query with new access token
-      result = await baseQuery(args, api, extraOptions)
-    } else {
-      api.dispatch(logOut())
+        const user = api.getState().auth?.user
+        const role = api.getState().auth?.role
+        const access = refreshResult.data.access
+        const refresh = refreshResult.data.refresh
+        api.dispatch(setCredentials({ access, refresh, user, role }))
+        // retry original query with new access token
+        result = await baseQuery(args, api, extraOptions)
+      } catch (e) {
+        console.warn(e)
+        api.dispatch(logOut())
+        throw new Error('refresh failed')
+      }
     }
+  } catch (e) {
+    throw new Error('auth failed')
   }
   return result
 }
