@@ -13,23 +13,25 @@ import RegistrationForm from '@ui/RegistrationForm'
 
 import { localization, environment } from '@config'
 
+const DEFAULT_VALUES = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  state: '',
+  country: '',
+  specialty: '',
+  profession: '',
+  toggle: false
+}
+
 const Registration = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
+  const { request } = useStdEmailRequest()
   const { parseProfessions, parseLimaSpecialties, parseCountries } =
     useParseStaticProfileData()
-  const { request } = useStdEmailRequest()
-  const [isLoading, setIsLoading] = useState(false)
+  useRecaptcha()
 
-  const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    state: '',
-    country: '',
-    specialty: '',
-    profession: '',
-    toggle: false
-  }
   const validationSchema = Yup.object({
     firstName: Yup.string().trim().required(t('registrationFirstNameRequired')),
     lastName: Yup.string().trim().required(t('registrationLastNameRequired')),
@@ -85,7 +87,6 @@ const Registration = () => {
       placeholder: t('registrationSpecialtyPlaceholder')
     }
   ]
-
   const onSubmit = async values => {
     try {
       setIsLoading(true)
@@ -113,17 +114,14 @@ const Registration = () => {
       setIsLoading(false)
     }
   }
-  useRecaptcha()
-
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(validationSchema),
-    defaultValues: initialValues
+    defaultValues: DEFAULT_VALUES
   })
 
   return (
     <RegistrationForm
-      handleSubmit={handleSubmit}
-      onSubmit={onSubmit}
+      handleSubmit={handleSubmit(onSubmit)}
       mapInputItems={mapInputItems}
       control={control}
       isLoading={isLoading}

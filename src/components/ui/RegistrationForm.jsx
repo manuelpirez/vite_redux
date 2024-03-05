@@ -9,41 +9,36 @@ import FormInput from '@ui/FormInput'
 import FormCheckBox from '@ui/FormCheckBox'
 import FormDropDown from '@ui/FormDropDown'
 
-const titleContainer = {
-  display: 'flex',
-  flexDirection: 'column',
-  marginBottom: '19px'
-}
-
 const Container = styled(Box, {
   name: 'Registration',
   overridesResolver: (props, styles) => [styles.container]
 })(() => {})
-
 const Checkbox = styled(FormCheckBox, {
   name: 'Registration',
   overridesResolver: (props, styles) => [styles.checkbox]
 })(() => {})
-
-const inputLabelStyle = theme => ({
-  marginTop: '8px',
-  ...theme.typography.loginInput.label
-})
-
 const Dropdown = styled(FormDropDown)(({ theme }) => ({
   '.MuiOutlinedInput-input': {
     ...theme.typography.registrationDropdown
   }
 }))
-
 const RegisterBtn = styled(FormButton, {
   name: 'Registration',
   overridesResolver: (props, styles) => [styles.button]
 })(() => {})
 
+const titleContainer = {
+  display: 'flex',
+  flexDirection: 'column',
+  marginBottom: '19px'
+}
+const inputLabelStyle = theme => ({
+  marginTop: '8px',
+  ...theme.typography.loginInput.label
+})
+
 const RegistrationForm = ({
   handleSubmit,
-  onSubmit,
   mapInputItems,
   control,
   isLoading,
@@ -65,7 +60,7 @@ const RegistrationForm = ({
           {registrationDescription}
         </Typography>
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         {mapInputItems.map(item => {
           if (item.options) {
             return (
@@ -112,7 +107,6 @@ const RegistrationForm = ({
 }
 RegistrationForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
   mapInputItems: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
