@@ -51,7 +51,7 @@ describe('Happy path', () => {
     )
   })
 
-  test('should do token login and return access & refresh tokens', async () => {
+  test('should do token login and return access', async () => {
     const test = await storeRef.store.dispatch(
       privateRequestsSlice.endpoints.tokenVerify.initiate('token')
     )
@@ -122,10 +122,9 @@ describe('Fail path', () => {
   })
 
   test('should refresh after verify responds 403 and verify again', async () => {
-    const test = storeRef.store.dispatch(
+    const test = await storeRef.store.dispatch(
       privateRequestsSlice.endpoints.tokenVerify.initiate('token')
     )
-
-    await expect(() => test.rejects.toThrowError('refresh failed'))
+    expect(() => test.rejects.toThrowError('refresh failed'))
   })
 })
