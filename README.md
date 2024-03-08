@@ -19,30 +19,36 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 
 [Read the Docs to Learn More](https://vitejs.dev).
 
-# Set up
+# Dev set-up
 
-📦`Node >=v18.0`
+Environment 📦`Node >=v18.0`
 
-- `npm install`
-- Start dev server `npm run dev`
-- Prod preview `npm run preview`
+- Install dependencies
+  - `npm install`
+- Start mock server
+  - `npm run start:server`
+- Start dev server
+  - `npm run dev`
 
-# Commits
+# Workflow
 
-`npm run commit`
+- Stage commits
+  - `git add .`
+- Commit changes
+  - `npm run commit`
 
-- We'll follow conventional commits convention
-  https://www.conventionalcommits.org/en/v1.0.0/
+### Manifest
 
-- Commits through
-  - commitizen
-  - cz-git - https://cz-git.qbb.sh/cli/install
-    - Open ai setup https://cz-git.qbb.sh/recipes/openai
-  - cz-conventional-changelog
+- [See this link for new component workflow](https://docs.google.com/document/d/1AWmog74wuFqTLcnNADRQRjAQ9htW8QyskCMawFL7-mM/edit)
+- Commits
+  - [Conventional commits convention](https://www.conventionalcommits.org/en/v1.0.0/) should be followed
+  - [commitizen with cz-git and changelog](https://cz-git.qbb.sh/cli/install)
+    - [Open ai setup is available ](https://cz-git.qbb.sh/recipes/openai)
   - linter & formatter
-    - .lintstagedrc.json
-    - .prettierrc.json
-  - hooks
+    - eslint config -> .eslintrc.cjs
+      - lint staged -> .lintstagedrc.json
+    - prettier config -> .prettierrc.json
+  - husky pre-commit config available
     - pre-commit
     - pre-commit-msg
 
@@ -54,16 +60,28 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 
 # Testing
 
-`npm run test`
+- Run tests
+  - `npm run test`
+- Open interactive test UI
+  - `npm run test:ui`
+- Disable silent mode in `vitest.config.js`
 
-`npm run test:ui`
+```
+  test: {
+    ...
+    silent: true <- remove
+  }
+```
 
-- react-testing-library + vitest
-- https://mswjs.io/
-- jsdom
+### Manifest
+
+- [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/) + [vitest](https://vitest.dev/)
+- [msw for api mock](https://mswjs.io/)
+- [jsdom](https://github.com/jsdom/jsdom)
 
 # Config file
 
+- brand: "ntk" | "dg"
 - storageOptions
   - type: "local" | "cookies"
   - domain: domain to save when using cookies
@@ -81,12 +99,16 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 
 # Changes
 
-- React v18
-- react-router v6
-- cra -> Vite
-- Redux -> old v new v
+- React v16 -> v18
+- react-router v5 -> v6
+- Compiler cra -> Vite
+- Redux
+  - react-redux 7.x.x -> 9.1.x
+  - toolkit 1.8.x -> 2.1.x
+  - redux-saga -> no more
 - awilix -> no more
 - jest -> vitest https://vitest.dev/
+- i18next 20.x.x -> 23.10.x
 
 # todo
 
@@ -94,5 +116,4 @@ In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/g
 - changing themes
 - translation update
 - params CRUD
-- fix tests
 - tracking
