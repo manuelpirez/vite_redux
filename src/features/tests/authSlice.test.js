@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest'
+import { test, expect, describe } from 'vitest'
 import reducer, {
   setCredentials,
   setDefCredentials,
@@ -11,48 +11,53 @@ const initialState = {
   refresh: undefined,
   role: undefined
 }
-test('should return the initial state', () => {
-  expect(reducer(undefined, initialState)).toEqual(initialState)
-})
 
-test('should handle data being added with setCredentials', () => {
-  const dataToAdd = {
-    user: 1,
-    access: 2
-  }
-  const addedData = {
-    user: 1,
-    access: 2
-  }
+describe('authSlice', () => {
+  test('should return the initial state', () => {
+    expect(reducer(undefined, initialState)).toEqual(initialState)
+  })
 
-  expect(reducer(initialState, setCredentials(dataToAdd))).toEqual(addedData)
-})
+  test('should handle data being added with setCredentials', () => {
+    const dataToAdd = {
+      user: 1,
+      access: 2
+    }
+    const addedData = {
+      user: 1,
+      access: 2
+    }
 
-test('should handle data being added with setDefCredentials', () => {
-  const dataToAdd = {
-    tokens: {
+    expect(reducer(initialState, setCredentials(dataToAdd))).toEqual(addedData)
+  })
+
+  test('should handle data being added with setDefCredentials', () => {
+    const dataToAdd = {
+      tokens: {
+        access: 'access',
+        refresh: 'refresh'
+      },
+      info: {
+        role: {
+          name: 'role'
+        }
+      }
+    }
+    const addedData = {
       access: 'access',
-      refresh: 'refresh'
-    },
-    info: {
-      role: {
-        name: 'role'
+      refresh: 'refresh',
+      role: 'role',
+      user: {
+        role: {
+          name: 'role'
+        }
       }
     }
-  }
-  const addedData = {
-    access: 'access',
-    refresh: 'refresh',
-    role: 'role',
-    user: {
-      role: {
-        name: 'role'
-      }
-    }
-  }
-  expect(reducer(initialState, setDefCredentials(dataToAdd))).toEqual(addedData)
-})
+    expect(reducer(initialState, setDefCredentials(dataToAdd))).toEqual(
+      addedData
+    )
+  })
 
-test('should remove with logOut', () => {
-  expect(reducer(initialState, logOut())).toEqual(initialState)
+  test('should remove with logOut', () => {
+    expect(reducer(initialState, logOut())).toEqual(initialState)
+  })
 })
