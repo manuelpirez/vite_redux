@@ -5,5 +5,13 @@
     "soft": "soft",
     "limited": "limited",
     "limited_reg": "limited_reg"
-  }
+  },
+  "roleTokenHiearchy": [
+    { "admin": ["admin"] },
+    { "auth": ["otp"] },
+    { "soft": ["dp"] },
+    { "limited": ["dsp"] },
+    { "limited_reg": [] },
+    { "anon": [] }
+  ]
 }

@@ -1,14 +1,15 @@
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
-
-import useTokenLogin from '@hooks/useTokenLogin'
-import useTokenVerify from '@hooks/useTokenVerify'
-
-import { selectAccessToken } from '@features/authSlice'
 
 import useSaveUrlParams from '@hooks/useSaveUrlParams'
+import useTokenVerify from '@hooks/useTokenVerify'
+import useTokenLogin from '@hooks/useTokenLogin'
 import useTracking from '@hooks/useTracking'
+
+import utilRoleHierarchy from '@utils/utilRoleHierarchy'
+
+import { selectAccessToken, selectRole } from '@features/authSlice'
 
 /**
  * The `PersistLogin` function handles the authentication and authorization logic in a React application.
@@ -24,6 +25,7 @@ const PersistLogin = () => {
   const tokenLogin = useTokenLogin()
   const tokenVerify = useTokenVerify()
   const token = useSelector(selectAccessToken)
+  const role = useSelector(selectRole)
   useSaveUrlParams()
   //const track = useTracking()
 
@@ -34,6 +36,25 @@ const PersistLogin = () => {
     if (location.search) navigate({ search: '' })
   }
 
+  const _evalAuthHierarchy = () => {
+    try {
+      const roleH = utilRoleHierarchy(role, location)
+
+      console.log(roleH)
+      // eval the hierarchy of the search param id against the cache role hierarchy
+
+      // if search param is greater -  do login
+      // if token login succed - save to cache and update user
+      // if token login fails - proceed with cache verify
+
+      // if search param is not greater
+      // do cache verify
+      // cache verify fails - do token login
+      // if token login fails - logout user
+    } catch (error) {
+      console.error(error)
+    }
+  }
   const _tokenVerify = async isMounted => {
     setIsLoading(true)
     try {
@@ -65,11 +86,18 @@ const PersistLogin = () => {
     return <Navigate to="/login" state={{ from: location }} replace />
   }
 
+  // IF NO CACHE & NO TOKEN - ATTEMPT ANON LOGIN - done by publicApiSlice
+  // IF NO TOKEN & CACHE - ATTEMPT CACHE LOGIN - done by tokenVerify
+  // IF NO CACHE & TOKEN  - ATTEMPT TOKEN LOGIN - done by tokenLogin
+  // IF TOKEN & CACHE - EVAL CACHE TYPE & DO VALID AUTH
+
   useEffect(() => {
     trackPageView()
     let isMounted = true
 
-    if (location.search) {
+    if (location.search && token) {
+      _evalAuthHierarchy()
+    } else if (location.search) {
       //TODO token hierarchy
       console.log('urltoken available')
       _tokenLogin(isMounted)
