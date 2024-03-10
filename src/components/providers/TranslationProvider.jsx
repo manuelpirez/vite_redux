@@ -15,7 +15,7 @@ i18n.use(initReactI18next).init({
     console.warn(lng, ns, key, fallbackValue)
   }
 })
-
+// TODO use context
 const TranslationProvider = ({ children }) => {
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
 }

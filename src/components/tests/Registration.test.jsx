@@ -1,7 +1,5 @@
 import { cleanup, render } from '@testing-library/react'
 import { afterEach, describe, it, vi, expect } from 'vitest'
-// import { cleanup, render, fireEvent, screen } from '@testing-library/react'
-// import { afterEach, describe, it, vi, expect, waitFor } from 'vitest'
 import Registration from '@components/Registration'
 
 import { ThemeProvider, createTheme } from '@mui/material/styles'
@@ -25,7 +23,7 @@ describe('RegistrationForm test:', () => {
   vi.mock('react-hook-form', async importOriginal => {
     const actual = await importOriginal()
     return {
-      //...actual,
+      ...actual,
       useForm: vi.fn(() => ({
         control: {},
         handleSubmit: vi.fn()

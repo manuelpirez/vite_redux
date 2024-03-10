@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectRole } from '@features/authSlice.js'
 
 /**
- * Check allowed role agains token and grants/deny access
+ * Check allowed role against token and grants/deny access
  * @param allowedRoles
  * @returns {JSX.Element}
  * @constructor
@@ -15,9 +15,8 @@ const RequireAuth = ({ allowedRoles }) => {
   const location = useLocation()
   const role = useSelector(selectRole)
 
-  if (allowedRoles?.includes(role)) {
-    return <Outlet />
-  }
+  if (allowedRoles?.includes(role)) return <Outlet />
+
   return <Navigate to="/login" state={{ from: location }} replace />
 }
 

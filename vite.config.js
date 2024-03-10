@@ -19,12 +19,13 @@ export default defineConfig({
       '@public': path.resolve(__dirname, './public/'),
       '@static': path.resolve(__dirname, './src/static/'),
       '@hooks': path.resolve(__dirname, './src/hooks/'),
+      '@utils': path.resolve(__dirname, './src/utils/'),
       '@config': path.resolve(__dirname, './src/site.config.json'),
       '@features': path.resolve(__dirname, './src/features/'),
       '@components': path.resolve(__dirname, './src/components/'),
       '@theme': path.resolve(__dirname, './src/style/'),
       '@ui': path.resolve(__dirname, './src/components/ui'),
-      '@test': path.resolve(__dirname, './tests')
+      '@test': path.resolve(__dirname, './test')
     }
   }
 })
