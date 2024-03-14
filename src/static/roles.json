@@ -6,7 +6,7 @@
     "limited": "limited",
     "limited_reg": "limited_reg"
   },
-  "roleTokenHiearchy": [
+  "roleTokenHierarchy": [
     { "admin": ["admin"] },
     { "auth": ["otp"] },
     { "soft": ["dp"] },

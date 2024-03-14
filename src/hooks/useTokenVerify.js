@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  logOut,
+  // logOut,
   selectAccessToken,
   setDefCredentials
 } from '@features/authSlice.js'
@@ -20,7 +20,8 @@ const useTokenVerify = () => {
       const response = await tokenVerify(token).unwrap()
       dispatch(setDefCredentials({ ...response }))
     } catch (e) {
-      dispatch(logOut())
+      // dispatch(logOut())
+      console.error(e)
       throw Error(e.message)
     }
   }

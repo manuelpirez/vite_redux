@@ -12,6 +12,7 @@ module.exports = app => {
     console.log(tokenGet)
     res.json({ ...mockdb.tokenGetAnon })
   })
+  // no fail
   //app.post(tokenVerify, (req, res) => {
   //  console.log(tokenVerify)
   //  setTimeout(() => {
@@ -27,10 +28,19 @@ module.exports = app => {
         res.status(403).send('You do not have rights to visit this page')
       }, '2000')
     } else {
-      res.json({ ...mockdb.tokenVerifyAuth })
+      res.json({ ...mockdb.token_verify_soft })
     }
   })
-
+  // test soft to auth
+  // app.post(tokenVerify, (req, res) => {
+  //   console.log(tokenVerify)
+  //   count++
+  //   if (count % 2) {
+  //     res.json({ ...mockdb.token_verify_soft })
+  //   } else {
+  //     res.json({ ...mockdb.tokenVerifyAuth })
+  //   }
+  // })
   app.get(tokenRefresh, (req, res) => {
     console.log(tokenRefresh)
     res.json({ ...mockdb.tokenRefresh })
