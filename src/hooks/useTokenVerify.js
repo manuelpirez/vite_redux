@@ -1,9 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  // logOut,
-  selectAccessToken,
-  setDefCredentials
-} from '@features/authSlice.js'
+import { useSelector } from 'react-redux'
+import { selectAccessToken } from '@features/authSlice.js'
 import { useTokenVerifyMutation } from '@features/endpoints/privateRequestsSlice.js'
 
 /**
@@ -12,17 +8,14 @@ import { useTokenVerifyMutation } from '@features/endpoints/privateRequestsSlice
  */
 const useTokenVerify = () => {
   const token = useSelector(selectAccessToken)
-  const dispatch = useDispatch()
   const [tokenVerify] = useTokenVerifyMutation()
 
   return async () => {
     try {
-      const response = await tokenVerify(token).unwrap()
-      dispatch(setDefCredentials({ ...response }))
+      return await tokenVerify(token).unwrap()
     } catch (e) {
-      // dispatch(logOut())
       console.error(e)
-      throw Error(e.message)
+      throw Error(e)
     }
   }
 }

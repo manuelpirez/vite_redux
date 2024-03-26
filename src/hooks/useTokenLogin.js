@@ -1,8 +1,6 @@
 import { useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 
-import { useTokenLoginMutation } from '@features/endpoints/rawRequestsSlice.js'
-import { setDefCredentials } from '@features/authSlice.js'
+import { useTokenLoginMutation } from '@features/endpoints/rawRequestsSlice'
 
 /**
  * A custom hook for token-based login functionality.
@@ -22,14 +20,14 @@ import { setDefCredentials } from '@features/authSlice.js'
  */
 const useTokenLogin = () => {
   const location = useLocation()
-  const dispatch = useDispatch()
+  let token = undefined
   const [tokenLogin] = useTokenLoginMutation()
 
   const otpLogin = async otp => {
     console.log('otpLogin')
     try {
       const response = await tokenLogin(otp).unwrap()
-      dispatch(setDefCredentials({ ...response }))
+      token = response
     } catch (e) {
       console.error(e)
       throw Error(e.message)
@@ -39,7 +37,7 @@ const useTokenLogin = () => {
     console.log('dpLogin')
     try {
       const response = await tokenLogin(dp).unwrap()
-      dispatch(setDefCredentials({ ...response }))
+      token = response
     } catch (e) {
       console.error(e)
       throw Error(e.message)
@@ -49,7 +47,8 @@ const useTokenLogin = () => {
     console.log('limitedLogin')
     try {
       const response = await tokenLogin(dspId).unwrap()
-      dispatch(setDefCredentials({ ...response }))
+      // add a parser in case API response is diferent
+      token = response
     } catch (e) {
       console.error(e)
       throw Error(e.message)
@@ -62,6 +61,7 @@ const useTokenLogin = () => {
       urlParams.has('otp') && (await otpLogin(urlParams.get('otp')))
       urlParams.has('dp') && (await dpLogin(urlParams.get('dp')))
       urlParams.has('dspId') && (await limitedLogin(urlParams.get('dspId')))
+      return token
     }
   }
 }
