@@ -3,20 +3,22 @@ import { Routes, Route } from 'react-router-dom'
 import { ROLES } from '@static/roles.json'
 import { ROUTES } from '@static/routes.json'
 
-import PersistLogin from '@components/PersistLogin'
-import RequireAuth from '@components/RequireAuth'
-import Feedback from '@components/Feedback'
-import Feed from '@components/Feed'
-import Misc from '@components/Misc'
-import Profile from '@components/Profile'
-import Article from '@components/Article'
-import LinkPage from '@components/LinkPage'
-import Home from '@components/Home'
-import Layout from '@components/Layout'
-import Login from '@components/Login'
-import NotFound from '@components/NotFound'
-import Unauthorized from '@components/Unauthorized'
-import LoginSuccess from '@components/LoginSuccess'
+import LoginSuccess from '@controllers/LoginSuccess'
+import Unauthorized from '@controllers/Unauthorized'
+import EditProfile from '@controllers/EditProfile'
+import Feedback from '@controllers/Feedback'
+import NotFound from '@controllers/NotFound'
+import LinkPage from '@controllers/LinkPage'
+import Article from '@controllers/Article'
+import Login from '@controllers/login'
+import Feed from '@controllers/Feed'
+import Home from '@controllers/Home'
+import Misc from '@controllers/Misc'
+
+import PersistLogin from '@auth/PersistLogin'
+import RequireAuth from '@auth/RequireAuth'
+
+import Layout from '@ui/Layout'
 
 function App() {
   return (
@@ -39,7 +41,7 @@ function App() {
           </Route>
 
           <Route element={<RequireAuth allowedRoles={[ROLES.auth]} />}>
-            <Route path={ROUTES.profile} element={<Profile />} />
+            <Route path={ROUTES.profile} element={<EditProfile />} />
           </Route>
         </Route>
 

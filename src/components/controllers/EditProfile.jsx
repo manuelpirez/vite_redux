@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom'
 
-const Profile = () => {
+/**
+ * Profile function component.
+ *
+ * Renders the Edit Profile Page.
+ *
+ * @returns {JSX.Element} The rendered Edit Profile Page.
+ */
+const EditProfile = () => {
   return (
     <section>
       <h1>Edit Profile Page</h1>
@@ -12,4 +19,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default EditProfile

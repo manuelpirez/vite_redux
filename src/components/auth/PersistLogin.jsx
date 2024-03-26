@@ -1,13 +1,11 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 import useSaveUrlParams from '@hooks/useSaveUrlParams'
 import useTokenVerify from '@hooks/useTokenVerify'
 import useTokenLogin from '@hooks/useTokenLogin'
 import useTracking from '@hooks/useTracking'
-
-import { selectAccessToken, selectRole, logOut } from '@features/authSlice'
+import useAuth from '@hooks/useAuth'
 
 import utilGetRoleHierarchy from '@utils/utilGetRoleHierarchy'
 
@@ -27,27 +25,28 @@ import utilGetRoleHierarchy from '@utils/utilGetRoleHierarchy'
  */
 const PersistLogin = () => {
   const location = useLocation()
-  //const navigate = useNavigate()
+
   const { trackPageView } = useTracking()
 
+  // Auth mgmt hooks
   const tokenLogin = useTokenLogin()
   const tokenVerify = useTokenVerify()
-  const token = useSelector(selectAccessToken)
-  const role = useSelector(selectRole)
-  const dispatch = useDispatch()
-
+  const { token, role, setDefaultTokenCredentials, logout } = useAuth()
   useSaveUrlParams()
-  //const track = useTracking()
 
   const [isLoading, setIsLoading] = useState(true)
 
-  const _tokenLoginFlow = async () => {
+  const _cacheVerificationFlow = async () => {
+    // token login
     if (location.search) {
-      const roleH = utilGetRoleHierarchy(role, location)
-      if (roleH) {
-        console.warn('// If search param is greater, do token login')
+      let roleH = false
+      if (role) roleH = utilGetRoleHierarchy(role, location)
+
+      if (roleH || !token) {
+        //console.warn('// If URLtoken is greater than cacheToken and no cacheToken do URLtoken login')
         try {
-          await tokenLogin()
+          const parsedURLToken = await tokenLogin()
+          setDefaultTokenCredentials(parsedURLToken)
           setIsLoading(false)
           return
         } catch (error) {
@@ -56,26 +55,39 @@ const PersistLogin = () => {
         }
       }
     }
-  }
 
-  const _cacheVerificationFlow = async () => {
-    console.log('// search param not greater/roleH is falsy, do cache verify')
-    try {
-      await tokenVerify()
-    } catch (error) {
-      console.log(error)
+    //console.log('// URLtoken not greater or roleH is falsy, do cacheToken verify')
+
+    if (token) {
+      try {
+        // console.log('// trying tokenVerify')
+        const parsedToken = await tokenVerify()
+        setDefaultTokenCredentials(parsedToken)
+        return
+      } catch (error) {
+        //console.warn('// ERROR : _cacheVerificationFlow - tokenVerify')
+        console.error(error)
+      }
     }
 
-    try {
-      console.log('// Cache verify fails, do token login')
-      await tokenLogin()
-      // Clear search params after successful token login
-      //if (location.search) navigate({ search: '' })
-    } catch (error) {
-      console.log('// everything failed logout')
-      console.error(error)
-      // Logout and redirect to the login page
-      dispatch(logOut())
+    //console.log('// cacheToken verify fails, do URLtoken login as last resource')
+    if (location.search) {
+      try {
+        const parsedURLToken = await tokenLogin()
+        setDefaultTokenCredentials(parsedURLToken)
+        return
+        // Clear search params after successful token login
+        //if (location.search) navigate({ search: '' })
+      } catch (error) {
+        // Logout and redirect to the login page
+        //console.log('// everything failed logout 1')
+        console.error(error)
+        logout()
+        return <Navigate to="/login" state={{ from: location }} replace />
+      }
+    } else {
+      //console.log('// everything failed logout 2')
+      logout()
       return <Navigate to="/login" state={{ from: location }} replace />
     }
   }
@@ -93,7 +105,6 @@ const PersistLogin = () => {
     setIsLoading(true)
 
     try {
-      await _tokenLoginFlow()
       await _cacheVerificationFlow()
     } finally {
       setIsLoading(false)
@@ -110,11 +121,13 @@ const PersistLogin = () => {
    */
   useEffect(() => {
     trackPageView()
-
+    console.log({ location, token })
     if (location.search || token) {
+      // console.log('eval')
       _evalAuthHierarchy()
+      // console.log('eval done')
     } else {
-      console.log('free load')
+      // console.log('free load')
       setIsLoading(false)
     }
 

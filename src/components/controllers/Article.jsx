@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import Feed from '@components/Feed.jsx'
 
 const Article = () => {
   return (
@@ -12,7 +11,7 @@ const Article = () => {
           <Link to="/">Home</Link>
         </div>
       </section>
-      <Feed />
+      <p>Feed</p>
     </>
   )
 }

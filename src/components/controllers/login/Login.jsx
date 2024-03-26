@@ -1,6 +1,6 @@
-import LoginWithEmail from '@components/LoginWithEmail'
-import LoginWithEmailAndPass from '@components/LoginWithEmailAndPass'
-import Registration from '@components/Registration'
+import LoginWithEmail from './LoginWithEmail'
+import LoginWithEmailAndPass from './LoginWithEmailAndPass'
+import Registration from './Registration'
 
 import { sections } from '@config'
 

@@ -10,21 +10,32 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './test/setup.js',
-    silent: true
+    silent: true,
+    coverage: {
+      exclude: ['server', 'test', 'src/style']
+    }
   },
   resolve: {
     alias: {
+      // asstes
       '@': path.resolve(__dirname, './src/'),
-      '@api': path.resolve(__dirname, './src/features/api'),
       '@public': path.resolve(__dirname, './public/'),
       '@static': path.resolve(__dirname, './src/static/'),
+      // services
+      '@api': path.resolve(__dirname, './src/features/api'),
+      '@features': path.resolve(__dirname, './src/features/'),
+      // utils
       '@hooks': path.resolve(__dirname, './src/hooks/'),
       '@utils': path.resolve(__dirname, './src/utils/'),
-      '@config': path.resolve(__dirname, './src/site.config.json'),
-      '@features': path.resolve(__dirname, './src/features/'),
-      '@components': path.resolve(__dirname, './src/components/'),
       '@theme': path.resolve(__dirname, './src/style/'),
+      '@config': path.resolve(__dirname, './src/site.config.json'),
+      // controllers, ui & providers
       '@ui': path.resolve(__dirname, './src/components/ui'),
+      '@auth': path.resolve(__dirname, './src/components/auth'),
+      '@providers': path.resolve(__dirname, './src/components/providers'),
+      '@components': path.resolve(__dirname, './src/components/'),
+      '@controllers': path.resolve(__dirname, './src/components/controllers'),
+      // tests config
       '@test': path.resolve(__dirname, './test')
     }
   }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
-import Page from '@components/Page'
+import Page from '@ui/Page'
 
 import { sections } from '@config'
 
