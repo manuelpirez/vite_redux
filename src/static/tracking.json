@@ -1,4 +1,7 @@
 {
+  "pageVarTotal": 6,
+  "siteId": 118,
+  "matomoScript": "https://a.mdquip.com/",
   "actions": {
     "/feed": {
       "name": "Someone saw the feed"
@@ -16,26 +19,42 @@
       "name": "Someone just logged in"
     }
   },
-  "customVarTotal": 6,
-  "piwikCustomVars": [
-    "MemberID",
-    "EmailID",
-    "SpecialtyID",
-    "country",
-    "CampaignID",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "gp_brand_name",
-    "event_id",
-    "",
-    "id_key",
-    "interactionId",
-    "audience_id",
-    "profession_id"
-  ],
+  "customVariables": {
+    "visit": [
+      "MemberID",
+      "EmailID",
+      "SpecialtyID",
+      "country",
+      "CampaignID",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "event_id",
+      "",
+      "id_key",
+      "interactionId",
+      "audience_id",
+      "profession_id"
+    ],
+    "page": [
+      "Project number",
+      "source",
+      "Dest URL",
+      "entity_id",
+      "fb_id",
+      "Click Type",
+      "title"
+    ],
+    "userData": {
+      "interactionId": "cache_key",
+      "destUrl": "cache_key",
+      "LanguageDisplay": "cache_key",
+      "LanguageClick": "cache_key"
+    }
+  },
   "matomoWhitelistParams": [
     "mtm_campaign",
     "mtm_keyword",

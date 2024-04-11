@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 import { useNavigate } from 'react-router-dom'
 
-import useTracking from '@hooks/useTracking'
+// import useTracking from '@hooks/useTracking'
 import useLogin from '@hooks/useLogin.js'
 
 import LoginWithEmailAndPassForm from '@ui/LoginWithEmailAndPassForm'
@@ -16,7 +16,7 @@ const LoginWithEmailAndPass = () => {
   const { t } = useTranslation()
   const { login } = useLogin()
   const navigate = useNavigate()
-  const { trackClickAction } = useTracking()
+  // const { trackClickAction } = useTracking()
 
   const [showLogin, setShowLogin] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -29,10 +29,10 @@ const LoginWithEmailAndPass = () => {
         ...values,
         email: values.emailStandard
       })
-      trackClickAction({
-        title: 'login-email',
-        clickType: 'login-email'
-      })
+      // trackClickAction({
+      //   title: 'login-email',
+      //   clickType: 'login-email'
+      // })
       navigate(location.state?.from?.pathname || '/', { replace: true })
     } catch (error) {
       console.error(error)

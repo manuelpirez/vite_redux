@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import useSaveUrlParams from '@hooks/useSaveUrlParams'
 import useTokenVerify from '@hooks/useTokenVerify'
 import useTokenLogin from '@hooks/useTokenLogin'
-import useTracking from '@hooks/useTracking'
+// import useTracking from '@hooks/useTracking'
 import useAuth from '@hooks/useAuth'
 
 import utilGetRoleHierarchy from '@utils/utilGetRoleHierarchy'
@@ -26,7 +26,8 @@ import utilGetRoleHierarchy from '@utils/utilGetRoleHierarchy'
 const PersistLogin = () => {
   const location = useLocation()
 
-  const { trackPageView } = useTracking()
+  // const { trackPageView } = useTracking()
+  // const track = useTracking()
 
   // Auth mgmt hooks
   const tokenLogin = useTokenLogin()
@@ -120,8 +121,9 @@ const PersistLogin = () => {
    * @returns {void}
    */
   useEffect(() => {
-    trackPageView()
-    console.log({ location, token })
+    // trackPageView()
+    // track({ ac: 'view', action: 'view/coso' })
+    // console.log({ location, token })
     if (location.search || token) {
       // console.log('eval')
       _evalAuthHierarchy()

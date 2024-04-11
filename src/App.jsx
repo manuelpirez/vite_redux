@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
 
-import { ROLES } from '@static/roles.json'
 import { ROUTES } from '@static/routes.json'
+import { ROLES } from '@static/roles.json'
 
 import LoginSuccess from '@controllers/LoginSuccess'
 import Unauthorized from '@controllers/Unauthorized'
@@ -19,8 +20,40 @@ import PersistLogin from '@auth/PersistLogin'
 import RequireAuth from '@auth/RequireAuth'
 
 import Layout from '@ui/Layout'
+// import initTrackingScript, {
+//   initialized,
+//   track
+// } from '@utils/tracking/trackUtil'
+// import useGetParams from '@hooks/useGetParams'
+import useTrackingScript from '@hooks/useTrackingScript'
 
 function App() {
+  const { track, initTrackingScript, initialized } = useTrackingScript()
+  // let i = 6
+  // code should replace default click type with test click
+  // the rest of the values set in tracking.json should use cache values that match cache_name
+  track('initApp', { 'Click Type': 'test click' }, { user: 'val' })
+  // const { mergedParams } = useGetParams(['interactionid'])
+  // console.log({ mergedParams })
+  useEffect(() => {
+    console.log({ initialized })
+    const initializeTracking = async () => {
+      const isInit = await initTrackingScript()
+      // window.location.replace('https://www.example.com')
+      console.log('APP: tracking script loaded')
+      if (isInit) {
+        console.log({ initialized })
+        console.log('APP: Tracking service initialized successfully.')
+      } else {
+        console.log({ initialized })
+        console.error('APP: Failed to initialize tracking service.')
+        // Handle initialization failure
+      }
+    }
+
+    initializeTracking()
+  }, [])
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

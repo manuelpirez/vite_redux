@@ -1,59 +1,36 @@
-import { actions } from '@static/tracking.json'
 import { useLocation } from 'react-router-dom'
+import { actions } from '@static/tracking.json'
+import { initialized } from '@utils/tracking/trackUtil'
 
 const useTracking = () => {
   const location = useLocation()
-  // const { mergedParams } = useGetParams([
-  //   'interactionid',
-  //   'testpersist',
-  //   'testnopersist',
-  //   'noexisto'
-  // ])
 
-  // useEffect(() => {
-  //   // only init once init flag from state
-  //   /*initializeTrackingScript({
-  //     url: '//staging-piwik.docguide.com/',
-  //     piwikSiteId: 123,
-  //     scriptName: 'piwik.js',
-  //     scriptUrl: '//staging.piwik.pslgroup.com/',
-  //     secure: true
-  //   })*/
-  // }, [location])
-
-  //useEffect(() => {
-  // console.log({ mergedParams })
-  //return () => navigate({ search: '' })
-  //}, [])
-
-  //const dispatch = useDispatch()
-  const trackSubmitAction = ({ action }) => {
-    console.log('trackSubmitAction')
-    const track = actions[action]?.name || action
+  const trackView = () => {
+    console.log('TRACK HOOK: trackPageView')
     console.log({ track })
-    //dispatch(trackActions.trackSubmitAction(obj))
-  }
-
-  const trackPageView = () => {
-    console.log('trackPageView')
     const track = actions[location.pathname]?.name || location.pathname
-    console.log({ track })
-    //dispatch(trackActions.trackPageView(obj))
   }
 
-  const trackClickAction = ({ action }) => {
-    console.log('trackClickAction')
-    console.log({ action })
-    //dispatch(trackActions.trackClickAction(obj))
-  }
-
-  const trackAction = ({ action, extra }) => {
-    console.log('trackAction')
-    const track = actions[action]?.name || action
+  const trackAction = ({ actionName, extra }) => {
+    console.log('TRACK HOOK: trackAction')
     console.log({ track, extra })
-    //dispatch(trackActions.trackCustomAction(obj))
+    const track = actions[actionName]?.name || actionName
   }
 
-  return { trackSubmitAction, trackPageView, trackClickAction, trackAction }
+  const track = async ({ action = '', actionName = '', extra = '' }) => {
+    console.log({ initialized })
+    switch (action) {
+      case 'view':
+        trackView({ actionName })
+        break
+      case 'action':
+        trackAction({ actionName, extra })
+        break
+      default:
+        console.error('Track type not available')
+    }
+  }
+
+  return track
 }
 export default useTracking

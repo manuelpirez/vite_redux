@@ -5,14 +5,14 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import useTracking from '@hooks/useTracking'
+// import useTracking from '@hooks/useTracking'
 import useLogin from '@hooks/useLogin'
 
 import LoginWithEmailForm from '@ui/LoginWithEmailForm'
 
 const LoginWithEmail = () => {
   const { t } = useTranslation()
-  const { trackClickAction } = useTracking()
+  // const { trackClickAction } = useTracking()
   const { loginWithEmail } = useLogin()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -27,10 +27,10 @@ const LoginWithEmail = () => {
     setIsLoading(true)
     try {
       await loginWithEmail({ ...values })
-      trackClickAction({
-        title: 'login-email',
-        clickType: 'login-email'
-      })
+      // trackClickAction({
+      //   title: 'login-email',
+      //   clickType: 'login-email'
+      // })
     } catch (error) {
       console.error(error)
     } finally {

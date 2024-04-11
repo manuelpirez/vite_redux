@@ -1,4 +1,17 @@
 {
-  "persist": ["interactionid", "testpersist"],
+  "persist": [
+    "interactionid",
+    "testpersist",
+    "memberid",
+    "emailid",
+    "specialtyid",
+    "country",
+    "campaignid",
+    "id_key",
+    "interactionid",
+    "audience_id",
+    "profession_id",
+    "event_id"
+  ],
   "noPersist": ["ugcaction", "testnopersist"]
 }
