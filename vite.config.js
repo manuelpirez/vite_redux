@@ -17,26 +17,21 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      // asstes
       '@': path.resolve(__dirname, './src/'),
+      '@api': path.resolve(__dirname, './src/features/api'),
+      '@auth': path.resolve(__dirname, './src/components/auth'),
+      '@components': path.resolve(__dirname, './src/components/'),
+      '@config': path.resolve(__dirname, './src/site.config.json'),
+      '@controllers': path.resolve(__dirname, './src/components/controllers'),
+      '@features': path.resolve(__dirname, './src/features/'),
+      '@hooks': path.resolve(__dirname, './src/hooks/'),
+      '@providers': path.resolve(__dirname, './src/components/providers'),
       '@public': path.resolve(__dirname, './public/'),
       '@static': path.resolve(__dirname, './src/static/'),
-      // services
-      '@api': path.resolve(__dirname, './src/features/api'),
-      '@features': path.resolve(__dirname, './src/features/'),
-      // utils
-      '@hooks': path.resolve(__dirname, './src/hooks/'),
-      '@utils': path.resolve(__dirname, './src/utils/'),
+      '@test': path.resolve(__dirname, './test'),
       '@theme': path.resolve(__dirname, './src/style/'),
-      '@config': path.resolve(__dirname, './src/site.config.json'),
-      // controllers, ui & providers
       '@ui': path.resolve(__dirname, './src/components/ui'),
-      '@auth': path.resolve(__dirname, './src/components/auth'),
-      '@providers': path.resolve(__dirname, './src/components/providers'),
-      '@components': path.resolve(__dirname, './src/components/'),
-      '@controllers': path.resolve(__dirname, './src/components/controllers'),
-      // tests config
-      '@test': path.resolve(__dirname, './test')
+      '@utils': path.resolve(__dirname, './src/utils/')
     }
   }
 })
