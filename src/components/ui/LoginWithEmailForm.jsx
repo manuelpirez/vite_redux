@@ -18,7 +18,21 @@ const inputLabelStyle = theme => ({
   marginTop: '8px',
   ...theme.typography.loginInput.label
 })
-
+/**
+ *
+ * Renders a form for logging in with email, including input fields for email and a submit button.
+ *
+ * @param {Object} props - The props object containing the following properties:
+ * @param {boolean} props.isLoading - Flag indicating if the form is in a loading state.
+ * @param {function} props.handleSubmit - Function to handle form submission.
+ * @param {function} props.onSubmit - Function to be called on form submission.
+ * @param {Object} props.control - Control object for managing form inputs.
+ * @param {string} props.signInHeader - Header text for the sign-in form.
+ * @param {string} props.signInSubHeader - Subheader text for the sign-in form.
+ * @param {string} props.signInEmailSubmitButton - Text for the submit button.
+ *
+ * @returns {JSX.Element} - Returns the JSX element representing the login form with email input and submit button.
+ */
 const LoginWithEmailForm = ({
   isLoading,
   handleSubmit,

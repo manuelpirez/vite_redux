@@ -1,4 +1,13 @@
 import PropTypes from 'prop-types'
+
+/**
+ * Renders an ArtCard component with the provided data.
+ *
+ * @param {Object} props - The props object containing the following properties:
+ * @param {Object} props.data - The data object containing information for the card.
+ * @param {function} props.setLastElement - The function to set the last element reference.
+ * @returns {JSX.Element} ArtCard component with title and body information.
+ */
 const ArtCard = ({ data, setLastElement }) => {
   return (
     <div

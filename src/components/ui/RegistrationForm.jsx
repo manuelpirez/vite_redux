@@ -37,6 +37,21 @@ const inputLabelStyle = theme => ({
   ...theme.typography.loginInput.label
 })
 
+/**
+ * Renders a form for the user to register
+ *
+ * @param props
+ * @param props.handleSubmit
+ * @param props.mapInputItems
+ * @param props.control
+ * @param props.isLoading
+ * @param props.registrationHeader
+ * @param props.registrationDescription
+ * @param props.registrationPrivacy
+ * @param props.registrationRegisterButton
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const RegistrationForm = ({
   handleSubmit,
   mapInputItems,

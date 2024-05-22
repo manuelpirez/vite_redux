@@ -30,10 +30,10 @@ const DividerLine = styled(Divider, {
 
 /**
  * Simple hooked up to the theme divider component with text
- * @param altTheme
- * @param text
- * @param color
- * @param caption
+ * @param {Object} altTheme
+ * @param {string} text
+ * @param {string} color
+ * @param {string} caption
  * @returns {JSX.Element}
  */
 const FormDivider = ({ altTheme, text = 'or', color = 'primary', caption }) => {

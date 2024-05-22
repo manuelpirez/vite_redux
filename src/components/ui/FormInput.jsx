@@ -11,7 +11,7 @@ const formControlStyle = { width: '100%' }
 
 /**
  * process react-hook-form error array
- * @param error
+ * @param {array} error
  * @returns {*|undefined}
  */
 const handleErrorMsg = error => {

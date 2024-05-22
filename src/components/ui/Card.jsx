@@ -1,5 +1,10 @@
 import { useState } from 'react'
 
+/**
+ * Renders a Generic Card
+ *
+ * @returns {JSX.Element}
+ */
 const Card = () => {
   const [count, setCount] = useState(0)
   return (
@@ -16,5 +21,4 @@ const Card = () => {
     </div>
   )
 }
-
 export default Card

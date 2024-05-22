@@ -23,7 +23,12 @@ const dividerStyle = theme => ({
     margin: '24px 25px 24px'
   }
 })
-
+/**
+ * @param {function} onClick
+ * @param {string} signInUsingPassword
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const LoginLink = ({ onClick, signInUsingPassword }) => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -38,6 +43,25 @@ LoginLink.propTypes = {
   signInUsingPassword: PropTypes.string
 }
 
+/**
+ * Renders Form with a email and password input
+ *
+ * @param {Object} props
+ * @param props.showLogin
+ * @param props.control
+ * @param props.onSubmit
+ * @param props.loginClick
+ * @param props.handleSubmit
+ * @param props.loginFetching
+ * @param props.signInPageUseEmail
+ * @param props.signInPageUseEmailFieldLabel
+ * @param props.signInPageUseEmailPasswordFieldLabel
+ * @param props.signInPageUseEmailSubmit
+ * @param props.signInEmailLinkInstruction
+ * @param props.signInUsingPassword
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const LoginWithEmailAndPassForm = ({
   showLogin,
   control,

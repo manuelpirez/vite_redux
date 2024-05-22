@@ -27,7 +27,12 @@ const Spinner = styled(CircularProgress, {
 /**
  * Custom MUI button
  * Inherits from: https://mui.com/material-ui/api/button
- * @param props
+ *
+ * @param {Object} props - The props object containing the following properties:
+ * @param {string} props.text
+ * @param {boolean} props.loading
+ * @param {*} props.children
+ * @param {string} props.variant
  * @returns {JSX.Element}
  * @constructor
  */
@@ -50,9 +55,6 @@ const FormButton = ({
 }
 
 FormButton.propTypes = {
-  /**
-   * Refers to specific style for the section
-   */
   section: PropTypes.oneOf([
     'feedback',
     'profile',
@@ -62,29 +64,11 @@ FormButton.propTypes = {
     'registration',
     'unsubscribe'
   ]),
-  /**
-   * MUI button variant, defaults to contained
-   */
   variant: PropTypes.string,
-  /**
-   * Button type, defaults to "button"
-   */
   type: PropTypes.oneOf(['button', 'submit']),
-  /**
-   * Button text
-   */
   text: PropTypes.string,
-  /**
-   * Show the loading spinner
-   */
   loading: PropTypes.bool,
-  /**
-   * Disable the button
-   */
   disabled: PropTypes.bool,
-  /**
-   * Support for child component
-   */
   children: PropTypes.string
 }
 

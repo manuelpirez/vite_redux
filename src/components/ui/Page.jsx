@@ -1,4 +1,19 @@
 import PropTypes from 'prop-types'
+
+/**
+ * Renders a UI container
+ * @param props
+ * @param props.children
+ * @param props.subHeader
+ * @param props.showHero
+ * @param props.specialContainer
+ * @param props.showHeader
+ * @param props.showFooter
+ * @param props.withoutWrap
+ * @param props.isFeed
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Page = ({
   children,
   subHeader,

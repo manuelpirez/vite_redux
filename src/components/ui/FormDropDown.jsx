@@ -35,13 +35,17 @@ const MenuProps = {
 const formControlStyle = { width: '100%' }
 
 /**
- * react-hook-form MUI integration
- * @param options
- * @param name
- * @param control
- * @param label
+ * react-hook-form MUI dropdown integration
+ *
+ * @param {Object} propOptions
+ * @param {string} placeholder
+ * @param {string} name
+ * @param {*} control
+ * @param {string} label
+ * @param {boolean} hasHelper
  * @param rest
  * @returns {JSX.Element}
+ * @constructor
  */
 const FormDropDown = ({
   options: propOptions = {},
