@@ -37,6 +37,21 @@ Environment 📦`Node >=v18.0`
 - Commit changes
   - `npm run commit`
 
+# Structure
+- src/
+- ├─ Index.jsx ➡️ Define providers and stores
+- ├─ App.jsx ➡️ Router & Auth 
+- ├─ components/
+- │  ├─ controllers ➡️ Router Facing React components
+- │  ├─ ui ➡️ Generic UI React Components
+- ├─ features ➡️ Redux API & State managers
+- ├─ hooks ➡️ Generic hooks and Redux interfaces
+- ├─ static ➡️ JSON configuration files
+- ├─ style ➡️ MUI Themes
+- ├─ utils ➡️ Generic functions & utilities
+
+
+
 ### Manifest
 
 - [See this link for new component workflow](https://docs.google.com/document/d/1AWmog74wuFqTLcnNADRQRjAQ9htW8QyskCMawFL7-mM/edit)
