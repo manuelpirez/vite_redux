@@ -8,37 +8,13 @@ import {
 } from '@static/tracking.json'
 import {
   addUserData,
-  isPiwikReady,
+  isMatomoReady,
   setCustomVariable,
   loadMatomoScript,
   trackPageViewAsync
-} from '@utils/tracking/matomo'
-// import { useSelector } from 'react-redux'
-// import { selectPersistParamsByKey } from '@features/urlPersistParamsSlice'
-// import { selectParamsByKey } from '@features/urlParamsSlice'
-// import { useEffect } from 'react'
+} from '@utils/matomo'
 import useGetParams from './useGetParams'
 
-// setup
-// change customVariables.page to array
-// change tracking util to hook
-// attach cache to track map
-
-/**
- * Attempt to abstract Piwik v4.x.x as a "service" to our needs
- *
- * Known issues:
- * Expected: The callback in a `trackPageView` call (and others) should always be executed, once the tracking Request is sent.
- * Current: In some circumstances, this is not happening. While testing, It's working in FF, but not in Chrome.
- * Docs: https://forum.matomo.org/t/wait-for-matomo-request-to-finish-callback-event/45875
- * ---
- * Initialize tracking script
- * check any deferred tracking actions
- *
- * @returns boolean
- */
-
-// misc
 const isEmpty = thing => {
   if (Array.isArray(thing)) {
     return thing.length === 0
@@ -48,60 +24,86 @@ const isEmpty = thing => {
   return false
 }
 
-// retrieve in memory variables
-// attempt tracking
-const useTrackingScript = () => {
-  let deferred = []
-  let initialized = false
+export let initialized = false
 
+/**
+ * Objective:
+ * - Attempt to abstract Piwik v4.x.x as a "service" to our needs
+ *
+ * Known issues:
+ * - Expected: The callback in a `trackPageView` call (and others) should always be executed, once the tracking Request is sent.
+ * - Current: In some circumstances, this is not happening. While testing, It's working in FF, but not in Chrome.
+ * - Docs: https://forum.matomo.org/t/wait-for-matomo-request-to-finish-callback-event/45875
+ *
+ * Summary:
+ * - Initialize tracking script
+ * - check any deferred tracking actions
+ *
+ * @returns {{setPageVars: setPageVars, initTrackingScript: ((function(): Promise<boolean>)|*), setCustomTrackingVars: setCustomTrackingVars, track: ((function(String, *, *): Promise<void>)|*)}}
+ */
+const useTrackingScript = () => {
+  // holds a list of actions that were triggered before initialization
+  let deferred = []
+  // Use tracking.json to get mapped parameters from cache
   const { mergedParams } = useGetParams([
     ...customVariables.page,
     ...customVariables.visit
   ])
 
+  /**
+   * Sets tracking variables for Matomo's Page Scope
+   *
+   * @param patternList
+   * @param varsObj
+   * @param clearOldVars
+   */
   const setPageVars = (patternList, varsObj, clearOldVars = true) => {
     if (clearOldVars) {
       for (let i = 1; i <= pageVarTotal; i++) {
         setCustomVariable(i, '', '', 'page')
       }
     }
-    // set new entries
-    // Object.entries(pageVars).forEach(([key, value], index) => {
-    //   console.log({ key, value })
-    //   setCustomVariable(index + 1, key, value, 'page')
-    // })
     setTrackingVars(patternList, varsObj, 'page')
-
-    patternList.forEach((visitKey, index) => {
-      setCustomVariable(
-        index + 1,
-        visitKey,
-        varsObj[visitKey.toLowerCase()] || '',
-        'page'
-      )
+  }
+  /**
+   * Iterates over an array looks for a matching key in the obj param
+   * Set the values by list in matomo, type defines scope
+   *
+   * @param {Array} list - a list of values to look for in Obj
+   * @param {Object} obj - an object with accepted key -> values
+   * @param {String} type - matomo custom var scope
+   */
+  const setTrackingVars = (list, obj, type) => {
+    list.forEach((val, i) => {
+      setCustomVariable(i + 1, val, obj[val.toLowerCase()] || '', type)
     })
   }
-  const setTrackingVars = (patternList, cacheObj, type) => {
-    patternList.forEach((visitKey, index) => {
-      setCustomVariable(
-        index + 1,
-        visitKey,
-        cacheObj[visitKey.toLowerCase()] || '',
-        type
-      )
-    })
-  }
-
-  //
+  /**
+   * Ignores patterns and sets unique tracking variables
+   * @param customVars
+   * @param type
+   */
   const setCustomTrackingVars = (customVars, type) => {
-    isPiwikReady()
+    isMatomoReady()
     Object.entries(customVars).forEach(([key, value], i) => {
       setCustomVariable(i, key, value, type)
     })
   }
+
+  /**
+   *  Adds Matomo actions to the local deferred list
+   *
+   * @param {String} action
+   * @param {Object} pageVars
+   * @param {Object} userData
+   */
   const setDeferred = ({ action, pageVars, userData }) => {
     deferred = [...deferred, { action, pageVars, userData }]
   }
+  /**
+   * Iterates over the deferred actions triggering Matomo tracking for each element
+   * @returns {Promise<void>}
+   */
   const runDeferred = async () => {
     console.log('TRACK: running deferred tracking')
     for (const { action, pageVars, userData } of deferred) {
@@ -109,58 +111,53 @@ const useTrackingScript = () => {
     }
   }
 
-  //
+  /**
+   * Attempts to load the Matomo tracking service
+   *
+   * @returns {Promise<boolean>}
+   */
   const initTrackingScript = async () => {
     try {
       await loadMatomoScript({ siteId, matomoScript })
-      // console.log('TRACK: script loaded')
       !isEmpty(deferred) && (await runDeferred())
-      // console.log('TRACK: deferred executed')
       initialized = true
+      return true
     } catch (e) {
       console.error('Error initializing tracking service:', e)
       initialized = false
       throw new Error(e)
     }
-    return initialized
   }
 
   /**
-   * Saves Page & Visit varialbles
-   * Runs trackPageView
-   * Deferres actions in case piwik is not ready
+   * 1. Saves Page & Visit variables
+   * 2. Runs trackPageView
+   * 3. Deferred actions in case piwik is not ready
    *
    * @param {String} action
-   * @param {Object} pageVars
-   * @param {Object} userData
-   * @param {Boolean} updateCacheTrackingVars
+   * @param pageVars
+   * @param userData
+   * @returns {Promise<void>}
    */
-  const track = async (
-    action,
-    pageVars,
-    userData
-    // updateCacheTrackingVars = false
-  ) => {
+  const track = async (action, pageVars, userData) => {
     try {
-      isPiwikReady()
+      isMatomoReady()
       console.log({ mergedParams })
-      // updateCacheTrackingVars &&
-      // pageVars &&
 
-      // VISIT
+      // set visit tracking variables
       setTrackingVars(customVariables.visit, mergedParams, 'visit')
 
-      // PAGE
+      // set page tracking variables - use cache if there are no custom page vars
       setPageVars(
         customVariables.page,
         pageVars ? mergedParams : pageVars,
-        'page'
+        true
       )
       // there should be a ML here to add any constant
       // userData &&
       addUserData(userData)
 
-      //   await trackPageViewAsync(action)
+      await trackPageViewAsync(action)
     } catch (e) {
       console.error(e)
       setDeferred({ action, pageVars, userData })
@@ -168,7 +165,6 @@ const useTrackingScript = () => {
   }
 
   return {
-    initialized,
     track,
     setPageVars,
     setCustomTrackingVars,

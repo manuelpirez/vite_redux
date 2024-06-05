@@ -1,13 +1,13 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
+import useTrackingScript, { initialized } from '@hooks/useTrackingScript'
 import useSaveUrlParams from '@hooks/useSaveUrlParams'
 import useTokenVerify from '@hooks/useTokenVerify'
 import useTokenLogin from '@hooks/useTokenLogin'
-// import useTracking from '@hooks/useTracking'
 import useAuth from '@hooks/useAuth'
 
-import utilGetRoleHierarchy from '@utils/utilGetRoleHierarchy'
+import getRoleHierarchy from '@utils/getRoleHierarchy.js'
 
 /**
  * The `PersistLogin` component handles the authentication and authorization logic in a React application.
@@ -25,9 +25,7 @@ import utilGetRoleHierarchy from '@utils/utilGetRoleHierarchy'
  */
 const PersistLogin = () => {
   const location = useLocation()
-
-  // const { trackPageView } = useTracking()
-  // const track = useTracking()
+  const { track, initTrackingScript } = useTrackingScript()
 
   // Auth mgmt hooks
   const tokenLogin = useTokenLogin()
@@ -41,7 +39,7 @@ const PersistLogin = () => {
     // token login
     if (location.search) {
       let roleH = false
-      if (role) roleH = utilGetRoleHierarchy(role, location)
+      if (role) roleH = getRoleHierarchy(role, location)
 
       if (roleH || !token) {
         //console.warn('// If URLtoken is greater than cacheToken and no cacheToken do URLtoken login')
@@ -112,6 +110,33 @@ const PersistLogin = () => {
     }
   }
 
+  useEffect(() => {
+    console.log({ initialized })
+    const initializeTracking = async () => {
+      const isInit = await initTrackingScript()
+      console.log('APP: tracking script loaded')
+      // window.location.replace('https://www.example.com')
+      if (isInit) {
+        track(
+          'initAppReal',
+          { 'Click Type': 'test click' },
+          { user: 'val' }
+        ).then(() => {
+          console.log({ initialized })
+          console.log('APP: Tracking service initialized successfully.')
+        })
+      } else {
+        console.log({ initialized })
+        console.error('APP: Failed to initialize tracking service.')
+      }
+    }
+    track(
+      'initAppDeferred',
+      { 'Click Type': 'test click' },
+      { user: 'val' }
+    ).then(() => initializeTracking())
+  }, [])
+
   /**
    * Effect hook that triggers the authentication hierarchy evaluation when the component mounts or the location changes.
    * Handles the loading state and renders the appropriate content based on the authentication status.
@@ -121,8 +146,6 @@ const PersistLogin = () => {
    * @returns {void}
    */
   useEffect(() => {
-    // trackPageView()
-    // track({ ac: 'view', action: 'view/coso' })
     // console.log({ location, token })
     if (location.search || token) {
       // console.log('eval')

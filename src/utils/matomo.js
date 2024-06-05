@@ -1,8 +1,6 @@
 /**
- * Initializes the Matomo tracking script.
- *
  * This function initializes the Matomo tracking script by setting the site ID and tracker URL,
- * and loading the script asynchronously.
+ * and loads the script asynchronously.
  *
  * @param {Object} options - The options for initializing the tracking script.
  * @param {string} options.siteId - The site ID for the Matomo tracking.
@@ -43,11 +41,22 @@ export const loadMatomoScript = async ({ siteId, matomoScript }) => {
   })
 }
 
-// tracking
+/**
+ * Triggers Matomo's trackPageView action
+ * @param action
+ * @returns {boolean}
+ */
 export const trackPageView = action => {
   window._paq.push(['trackPageView', action])
   return true
 }
+
+/**
+ * Triggers Matomo's trackPageView action and returns a promise
+ *
+ * @param action
+ * @returns {Promise<void>}
+ */
 export const trackPageViewAsync = async action => {
   await new Promise(resolve => {
     window._paq.push([
@@ -65,24 +74,43 @@ export const trackPageViewAsync = async action => {
   })
 }
 
-// tracking URL
+/**
+ * Adds data to matomo's user_data complementary object
+ * @param userDataObj
+ */
 export const addUserData = userDataObj => {
   window._paq.push([
     'appendToTrackingUrl',
     `user_data=${encodeURIComponent(JSON.stringify(userDataObj))}`
   ])
 }
+
+/**
+ * Appends data to main tracking URL
+ * @param encodedString
+ */
 export const appendToTrackingUrl = encodedString => {
   window['_paq'].push(['appendToTrackingUrl', encodedString])
 }
 
-// custom Vars
+/**
+ * Sets custom variables for page and visit scope.
+ *
+ * @param index
+ * @param key
+ * @param value
+ * @param scope
+ */
 export const setCustomVariable = (index, key, value, scope) => {
   window._paq.push(['setCustomVariable', index, key, value, scope])
 }
 
-// misc
-export const isPiwikReady = () => {
+/**
+ * Does a false check on matomo's ready set variable
+ *
+ * @returns {boolean}
+ */
+export const isMatomoReady = () => {
   if (!window._paq) {
     throw new Error('Piwik is not initialized')
   } else {

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { actions } from '@static/tracking.json'
-import { initialized } from '@utils/tracking/trackUtil'
+import { isMatomoReady } from '@utils/matomo.js'
 
 const useTracking = () => {
   const location = useLocation()
@@ -17,8 +17,8 @@ const useTracking = () => {
     const track = actions[actionName]?.name || actionName
   }
 
-  const track = async ({ action = '', actionName = '', extra = '' }) => {
-    console.log({ initialized })
+  return async ({ action = '', actionName = '', extra = '' }) => {
+    console.log('READY' + isMatomoReady())
     switch (action) {
       case 'view':
         trackView({ actionName })
@@ -30,7 +30,5 @@ const useTracking = () => {
         console.error('Track type not available')
     }
   }
-
-  return track
 }
 export default useTracking

@@ -63,13 +63,13 @@ const compareTokenAndRole = (tokenId, role, roleTokenHierarchy) => {
  * @param {URL} location - The URL object to search for token IDs.
  * @returns {boolean} - True if the role has a higher token ID hierarchy, false otherwise.
  */
-const utilGetRoleHierarchy = (role, location) => {
+const getRoleHierarchy = (role, location) => {
   const { tokenId } = findTokenIdInString(allTokenIds, location)
 
   return compareTokenAndRole(tokenId, role, roleTokenHierarchy)
 }
 
-export default utilGetRoleHierarchy
+export default getRoleHierarchy
 
 // if search param is greater -  do login
 // if token login succed - save to cache and update user
